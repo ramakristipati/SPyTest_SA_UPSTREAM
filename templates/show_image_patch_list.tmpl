@@ -1,0 +1,8 @@
+Value IMAGE_ID (\d+)
+Value IMAGE_NAMES (\S+)
+Value DATE ([\s\d\.\-\:]+)
+
+
+Start
+  ^\s*Id\s+Tag\s+Date\s*$$
+  ^\s*${IMAGE_ID}\s+${IMAGE_NAMES}\s+${DATE}\s* -> Record

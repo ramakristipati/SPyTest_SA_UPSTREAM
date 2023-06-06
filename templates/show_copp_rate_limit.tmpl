@@ -1,0 +1,11 @@
+Value MAX_RATE (\d+)
+Value MAX_BURST (\d+)
+Value RATE (\d+)
+Value TOKENS (\d+)
+
+Start
+  ^\s*Rx0 max rate\s+${MAX_RATE}
+  ^\s*Rx0 max burst\s+${MAX_BURST}
+  ^\s*Rx0 rate\s+${RATE}
+  ^\s*Rx0 tokens\s+${TOKENS}
+

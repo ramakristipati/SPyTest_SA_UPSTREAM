@@ -1,0 +1,20 @@
+#IP Hash Mode: Default
+#IPv6 Hash Mode: Symmetric
+#Packet Header Fields:
+#IP: ipv4-src-ip 
+#IPv6: ipv6-src-ip  ipv6-next-hdr
+#Hash seed: 10
+Value ip_mode (.*)
+Value ipv6_mode (.*)
+Value ip (.*)
+Value ipv6 (.*)
+Value seed (\d+)
+
+Start
+  ^\s*IP Hash Mode: ${ip_mode}\s*$$
+  ^\s*IPv6 Hash Mode: ${ipv6_mode}\s*$$
+  ^\s*IP:\s*${ip}\s*$$
+  ^\s*IPv6:\s*${ipv6}\s*$$
+  ^\s*Hash seed:\s*${seed}\s*$$ -> Record
+
+EOF

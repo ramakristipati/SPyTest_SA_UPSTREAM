@@ -1,0 +1,21 @@
+Value cpu_user (\d+\.\d+)
+Value cpu_sys (\d+\.\d+)
+Value cpu_nice (\d+\.\d+)
+Value cpu_idle (\d+\.\d+)
+Value cpu_wait (\d+\.\d+)
+Value total (\d+\.*\d*)
+Value free (\d+\.*\d*)
+Value used (\d+\.*\d*)
+Value buff_cache (\d+\.*\d*)
+Value pid (\d+)
+Value user (\S+)
+Value cpu (\S+)
+Value mem (\S+)
+Value time (\S+)
+Value command (\S+)
+
+Start
+  ^\s*\%Cpu\(s\)\:\s+${cpu_user} us\,\s+${cpu_sys} sy\,\s+${cpu_nice} ni\,\s+${cpu_idle} id\,\s+${cpu_wait} wa\,\s*\S+ hi\,\s*\S+ si,\s*\S+ st\s*$$ -> Record
+  ^\s*[KM]iB\s*Mem\s*:\s*${total}\s*total,\s*${free}\s*free,\s*${used}\s*used,\s*${buff_cache}\s*buff\/cache\s*$$ -> Record
+  ^\s*\S+\s*Mem\s*:\s*${total}\s*total,\s*${free}\s*free,\s*${used}\s*used,\s*${buff_cache}\s*buff\/cache\s*$$ -> Record
+  ^\s*${pid}\s+${user}\s+\S+\s+\S+\s+\d+\s+\d+\s+\d+\s+\w+\s+${cpu}\s+${mem}\s+${time}\s+${command}\s*$$ -> Record

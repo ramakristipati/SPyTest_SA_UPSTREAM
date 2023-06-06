@@ -1,0 +1,11 @@
+Value repo (\S+)
+Value tag (\S+)
+Value image (\S+)
+Value created ((\w+\s*)*)
+Value size (\S+)
+
+
+Start
+  ^\s*REPOSITORY\s+TAG\s+IMAGE ID\s+CREATED\s+SIZE\s*$$
+  ^\s*${repo}\s+${tag}\s+${image}\s+${created}\s+${size}\s*$$ -> Record
+

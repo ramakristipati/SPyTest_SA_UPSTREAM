@@ -1,0 +1,15 @@
+Value Filldown name ([\s\S]+)
+Value Filldown revision (\d+)
+Value Filldown instance_count (\d+)
+Value Filldown digest (\S+)
+Value Filldown instance (\d+)
+Value vlan_map ([\d\,\-]+)
+
+Start
+  ^\s*Name\s+\[${name}\]\s*$$
+  ^\s*Revision\s+${revision}\s+Instances\s+configured\s+${instance_count}\s*$$
+  ^\s*Digest\s+${digest}\s*$$
+  ^\s*${instance}\s+${vlan_map}\s*$$ -> Record
+  ^\s*(?!\-)+\s*${vlan_map}\s*$$ -> Record
+
+EOF

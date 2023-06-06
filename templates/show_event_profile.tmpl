@@ -1,0 +1,20 @@
+Value profile ([A-Za-z-:.0-9]+)
+Value profile_lst ([A-Za-z-:.0-9]+)
+
+Start
+ ^[-]+$$
+ ^Active Event Profile$$ -> ActiveProfile
+
+ActiveProfile
+ ^[-]+$$
+ ^\s*${profile}\s*$$ -> Record AvailableList
+ 
+AvailableList
+ ^[-]+$$
+ ^Available Event Profiles$$ -> Record ProfileList
+
+ProfileList
+ ^[-]+$$
+ ^\s*${profile_lst}\s*$$ -> Record
+
+EOF

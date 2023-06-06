@@ -1,0 +1,32 @@
+###############################################################
+#sonic# show ip pim neighbor 
+#Interface         Neighbor    Uptime  Holdtime  DR Pri
+#Ethernet24       10.10.10.2  00:00:07  00:01:37       1
+#
+#sonic# show ip pim vrf all  neighbor 
+#VRF: default
+#Interface         Neighbor    Uptime  Holdtime  DR Pri
+#Ethernet24       10.10.10.2  00:17:29  00:01:15       1
+#VRF: RED
+#Interface         Neighbor    Uptime  Holdtime  DR Pri
+#Ethernet26       10.10.10.2  00:17:29  00:01:15       1
+###############################################################
+Value Filldown vrf (\w+)
+Value Required interface (\S+)
+Value neighbor (\S+)
+Value uptime ([\w\d\:]+)
+Value holdtime ([\d\:]+)
+Value dr_priority (\d+)
+Value bfd_status (\w+\s\w+|\S+)
+
+Start
+  ^\s*.*VRF:\s*${vrf}\s*$$
+  ^\s*Interface\s+Neighbor\s+Uptime\s+Holdtime\s+DR Pri\s*$$ -> Pim_Table
+  ^\s*Interface\s+Neighbor\s+Uptime\s+Expirytime\s+DR-Priority\s+BFD-State\s*$$ -> Pim_Table
+
+Pim_Table
+  ^\s*.*VRF:\s*${vrf}\s*$$
+  ^\s*${interface}\s+${neighbor}\s+${uptime}\s+${holdtime}\s+${dr_priority}\s*$$ -> Record
+  ^\s*${interface}\s+${neighbor}\s+${uptime}\s+${holdtime}\s+${dr_priority}\s+${bfd_status}\s*$$ -> Record
+
+EOF

@@ -1,0 +1,13 @@
+#Authentication Monitor Mode.................... Disabled
+#Number of Authenticated clients................ 2
+#Number of clients in Monitor mode.............. 0
+###############################################################
+Value auth_monitor_mode (\S+)
+Value total_auth_clients (\d+)
+Value total_clients_monitor (\d+)
+
+Start
+  ^\s*Authentication\s+Monitor\s+Mode\s*\.+\s*${auth_monitor_mode}$$
+  ^\s*Number\s+of\s+Authenticated\s+clients\s*\.+\s*${total_auth_clients}$$
+  ^\s*Number\s+of\s+clients\s+in\s+Monitor\s+mode\s*\.+\s*${total_clients_monitor}$$ -> Record
+

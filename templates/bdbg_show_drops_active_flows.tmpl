@@ -1,0 +1,15 @@
+Value Filldown drops (\d+)
+Value Drop_id (\d+)
+Value srcip (\S+)
+Value dstip (\S+)
+Value drop_reason (\S+)
+Value Drop_type (\S+)
+Value Intf_name (\S+)
+Value timestamp (\d+\s+\w+\s+\d+,\s+\d+:\d+:\d+\s+\w+)
+
+
+Start
+  ^\s*Number of Dropping Flows\s+:\s+${drops}\s*$$
+  ^\s*${Drop_id}\s+${srcip}\s+${dstip}\s+${drop_reason}\s+${Drop_type}\s+${Intf_name}\s+${timestamp}\s*$$ -> Record
+
+EOF

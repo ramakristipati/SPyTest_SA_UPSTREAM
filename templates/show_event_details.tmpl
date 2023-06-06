@@ -1,0 +1,18 @@
+Value Key Id (\d+)
+Value Action ([A-Z-]+)
+Value Severity (\w+)
+Value Name (\w+)
+Value Timestamp ([A-Za-z-:.0-9]+)
+Value Description ([A-Za-z/:.\s0-9.]+)
+Value Source ([A-Za-z/:.\s0-9.]+)
+
+Start
+ ^\s*Id:\s+${Id}\s*$$
+ ^\s*Action:\s+${Action}\s*$$
+ ^\s*Severity:\s+${Severity}\s*$$
+ ^\s*Type:\s+${Name}\s*$$
+ ^\s*Timestamp:\s+${Timestamp}\s*$$
+ ^\s*Description:\s+${Description}\s*$$
+ ^\s*Source:\s+${Source}\s*$$ -> Record 
+
+EOF

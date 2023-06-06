@@ -1,0 +1,26 @@
+Value Filldown resume (\d+)
+Value Filldown drop (\d+)
+Value Filldown max (\d+)
+Value cpu (\d+)
+Value counter_pkts (\d+)
+Value drop_pkts (\d+)
+Value last_q_size (\d+)
+Value high_watermark (\d+)
+Value high_watermark_val (\S+)
+Value rx_cpu (\d+)
+Value rx_cpu_selected (\*)
+Value rx_q_counter_pkts (\d+)
+Value rx_q_drop_pkts (\d+)
+Value net_rx_drop (\d+)
+Value Fillup status (\S+)
+
+
+Start
+  ^\s*Netif\s+Rx\s+Backlog\s+Queues\s+Stats\s+\(resume/drop/max:\s+${resume}/${drop}/${max}\)\s*$$ -> Record
+  ^\s*${cpu}\s+${counter_pkts}\s+${drop_pkts}\s+${last_q_size}\s+${high_watermark}\s*$$ -> Record
+  ^\s*${cpu}\s+${counter_pkts}\s+${drop_pkts}\s+${last_q_size}\s+${high_watermark}\s+\(${high_watermark_val}\)\s*$$ -> Record
+  ^\s*${rx_cpu}\s+${rx_q_counter_pkts}\s+${rx_q_drop_pkts}\s+${net_rx_drop}\s*$$ -> Record
+  ^\s*${rx_cpu}${rx_cpu_selected}\s+${rx_q_counter_pkts}\s+${rx_q_drop_pkts}\s+${net_rx_drop}\s*$$ -> Record
+  ^\s*CPU\s+Rx\s+Queues\s+Stats\s+\(\*drop\s+enabled:\s+${status}\)\s*$$ -> Record
+
+EOF

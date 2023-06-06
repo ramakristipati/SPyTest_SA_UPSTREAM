@@ -1,0 +1,14 @@
+Value Port (Eth\S+)
+Value Admin_Mode (\S+)
+Value Priority (\S+)
+Value Power_Limit (\d+)
+Value Power_Limit_Type (\S+\s\S+)
+Value High_Power (\S+)
+Value Power_Up_Mode (\S+)
+Value Detection_Type (\S+)
+
+
+Start
+  ^\s*${Port}\s+${Admin_Mode}\s+${Priority}\s+${Power_Limit}\s+${Power_Limit_Type}\s+${High_Power}\s+${Power_Up_Mode}\s+${Detection_Type}\s*$$ -> Record
+
+EOF

@@ -1,0 +1,11 @@
+Value File_name (\S+)
+Value Timestamp (\d+\-\d+\-\d+\s+\d+\:\d+)
+Value Type_of_file (\S+)
+
+Start
+  ^(\-)+
+  ^\s*Date\(Last Modified\)\s+Size\(Bytes\)\s+Type\s+Filename\s*
+  ^\s*${Timestamp}\s+\d+\s+${Type_of_file}\s+${File_name}\s*$$ -> Record
+  ^.* -> Error
+
+EOF

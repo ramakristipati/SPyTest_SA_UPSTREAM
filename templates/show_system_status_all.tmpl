@@ -1,0 +1,12 @@
+Value status (System is ready|System is not ready - one or more services are not up)
+Value ServName (\S+)
+Value ServStatus (OK|Down|Starting)
+Value State (OK|Down|Starting)
+Value Reason (\S+)
+
+Start
+  ^\s*${status}\s*$$
+  ^\s*Service-Name\s+Service-Status\s+App-Ready-Status\s+Down-Reason\s*$$ -> Status_table
+
+Status_table
+  ^\s*${ServName}\s+${ServStatus}\s+${State}\s+${Reason}\s*$$ -> Record

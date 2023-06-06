@@ -1,0 +1,17 @@
+Value Filldown OBJ_GROUP (\S+)
+Value Filldown ADDR_FAMILY (\S+)
+Value Filldown,List HOST_IP (\S+)
+Value ACL_TYPE (\S+)
+Value ACCESS_LIST (\S+)
+Value INTERFACE (\S+)
+
+Start
+  ^\s*Network\s+object-group\s+${OBJ_GROUP}\s+address-family\s+${ADDR_FAMILY}\s*$$
+  ^\s*Entries:\s*$$
+  ^\s*network-object\shost\s${HOST_IP}\s*$$
+  ^\s*$$
+  ^\s*Referenced by:\s*$$
+  ^\s*${ACL_TYPE}\s+access-list\s+${ACCESS_LIST}\s+on\s+${INTERFACE}\s+as\s+source*$$ -> Continue.Record
+  ^\s*$$ -> Clearall
+
+EOF

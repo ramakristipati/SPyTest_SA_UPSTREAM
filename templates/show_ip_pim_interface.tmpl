@@ -1,0 +1,38 @@
+#####################################################
+# (vtysh)
+#sonic# show ip pim interface          
+#Interface  State          Address  PIM Nbrs           PIM DR  FHR IfChannels
+#Ethernet7     up       10.10.10.1         0            local    0          0
+#pimreg        up          0.0.0.0         0            local    0          0
+# 
+# (sonic-cli)
+#PIM Interface information for VRF: Vrf2
+#Interface      State     Address           PIM Nbrs    PIM DR            Hello-interval    PIM DR-Priority
+#Vlan110        up        110.0.0.1         1           110.0.0.2         3                 15
+#Vlan171        up        171.0.0.1         0           171.0.0.1         4                 20
+#######################################################
+Value Filldown vrf (\w+)
+Value interface ([\w/.]+)
+Value state (\w+)
+Value address ([\w\.]+)
+Value nbr_count (\d+)
+Value dr ([\w\.]+)
+Value fhr (\w+)
+Value if_channels (\d+)
+Value hello_intvl (\d+)
+Value dr_priority (\d+)
+
+Start
+  ^\s*VRF:\s*${vrf}$$
+  ^\s*PIM interface information for VRF:\s${vrf} -> parse_mgmt_fields
+  ^.*Interface\s*State\s*Address\s*PIM\s*Nbrs\s*PIM\s*DR\s*FHR\s*IfChannels -> header
+
+header
+  ^\s*${interface}\s*${state}\s*${address}\s*${nbr_count}\s*${dr}\s*${fhr}\s*${if_channels}$$ -> Record
+
+parse_mgmt_fields
+  ^\s*PIM interface information for VRF:\s${vrf}
+  ^\s*${interface}\s*${state}\s*${address}\s*${nbr_count}\s*${dr}\s*${hello_intvl}\s*${dr_priority} -> Record
+
+
+

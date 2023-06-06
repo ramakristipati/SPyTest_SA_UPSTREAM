@@ -1,0 +1,22 @@
+Value Filldown status (Disabled|Enabled)
+Value mount_dir ([\/\w]+)
+Value device_name ([\/\w]+)
+Value file (\w+)
+Value model_name ([\w\s]+)
+Value form ([\w\s]+)
+
+Start
+  ^\s*Auto Detection:\s+$status\s*$$
+  ^\s*Mount Dir\s+Device Name\s+File\s?[S|s]ystem -> USB_status
+  ^\s*USB Device|Device name\s+Manufacturer\s+Model\sName -> USB_devices
+  ^\s*Device [N|n]ame\s+Mount Dir\s+File\s?[S|s]ystem -> USB_partitions
+
+USB_status
+  ^\s*${mount_dir}\s+${device_name}\s+${file}\s*$$ -> Record
+  ^\s*${form}\s*$$ -> Record
+
+USB_devices
+  ^\s*${device_name}\s+${file}\s+${model_name}\s*$$ -> Record
+
+USB_partitions
+  ^\s*${device_name}\s+${mount_dir}\s+${file}\s*$$ -> Record

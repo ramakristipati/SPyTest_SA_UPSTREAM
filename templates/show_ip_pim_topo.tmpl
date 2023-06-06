@@ -1,0 +1,19 @@
+Value Filldown iif (\S+)
+Value vrf (\S+)
+Value Filldown rpf_nbr (\S+)
+Value Filldown group (\S+)
+Value Filldown source (\S+)
+Value uptime (\S+)
+Value expires (\S+)
+Value oif (\S+)
+Value Filldown flag ([SCLPRFTJK]*)
+
+Start
+  ^\s*.*VRF\s*\:\s*${vrf}\s*$$
+  ^Flags:.*$$ -> Continue
+  ^\s*\(${source},\s+${group}\),\s+uptime\s+${uptime},\s+expires\s+${expires},\s+flags\s+${flag}\s*$$
+  ^\s*Incoming\s+interface:\s+${iif},\s+RPF\s+neighbor\s+${rpf_nbr}\s*$$
+  ^\s*Outgoing\s+interface\s+list:\s*$$
+  ^\s*${oif}\s+uptime/expiry-time:\s+${uptime}/${expires}\s*$$ -> Record
+
+EOF

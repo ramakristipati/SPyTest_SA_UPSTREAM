@@ -1,0 +1,32 @@
+Value Filldown POLICY_MAP (\S+)
+Value Filldown POLICY_TYPE (\S+)
+Value Filldown CLASS_DESCRIPTION (\S+)
+Value Required CLASS_MAP (\S+)
+Value Fillup PRIORITY (\d+)
+Value Fillup DESCRIPTION (\S+)
+Value Fillup CIR (\d+)
+Value Fillup CBS (\d+)
+Value Fillup PIR (\d+)
+Value Fillup PBS (\d+)
+Value Fillup TRAP_QUEUE (\d+)
+Value Fillup DIRECTION (\S+)
+
+Start
+  ^Policy\s${POLICY_MAP}\sType\s${POLICY_TYPE}$$
+  ^\s{2}Description:\s*${CLASS_DESCRIPTION}\s*$$
+  ^\s*Flow\s${CLASS_MAP}\sat\spriority\s${PRIORITY} -> Continue.Record
+  ^\s{4}Description:\s+${DESCRIPTION}\s*$$
+  ^\s*police\scir\s${CIR}\scbs\s${CBS}\spir\s${PIR}\spbs\s${PBS} -> Record
+  ^\s*set-trap-queue\s*${TRAP_QUEUE} -> Record
+  ^\s*trap-queue\s*${TRAP_QUEUE} -> Record
+  ^\s*CPU\sat\s${DIRECTION} -> Record
+
+
+#Policy policy0 Type acl-copp
+#  Description: def_class
+#  Flow class_defaultQ at priority 100
+#    Description: Flow1
+#    police cir 100 cbs 110 pir 200 pbs 210
+#    set-trap-queue 10
+#  Applied to:
+#    CPU at Ingress

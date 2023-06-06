@@ -1,0 +1,79 @@
+Value PIM_VRF (Vrf\w+)
+Value JP_INTERVAL (\d+)
+Value KEEPALIVE_TIME (\d+)
+Value SSM_RANGE_PREFIX (\w+)
+Value ECMP (ecmp)
+Value ECMP_REBALANCE (ecmp\srebalance)
+Value INTERFACE ([\w/.]+)
+Value HELLO_INTVL (\d+)
+Value DR_PRIORITY (\d+)
+Value BFD_ENABLE (bfd)
+Value PIM_MODE (pim)
+Value RP_ADDRESS ([\d\.]+)
+Value RP_GROUP (224.0.0.0/4)
+Value RP_PREFIX_LIST (\w+)
+Value SPT_SWITCHOVER (infinity-and-beyond)
+Value SPT_PREFIX_LIST (\w+)
+Value LAST_QUERY_INTERVAL (\d+)
+Value QUERY_INTERVAL (\d+)
+Value LAST_QUERY_COUNT (\d+)
+Value QUERY_MAX_RESPONSE (\d+)
+Value SOURCE ([\d\.]+)
+Value GROUP ([\d\.]+)
+Value VERSION (\d+)
+
+Start
+  #If a line starts with 'frr version', go to Global section
+  ^frr version -> Global
+  #If a line starts with 'vrf' go to Vrfconfig section
+  ^vrf ${PIM_VRF} -> Vrfconfig
+  #If a line starts with 'interface' go to Ifconfig section
+  ^interface ${INTERFACE} -> Ifconfig
+
+Global
+  ^ip pim join-prune-interval ${JP_INTERVAL}
+  ^ip pim keep-alive-timer ${KEEPALIVE_TIME}
+  ^ip pim ssm prefix-list ${SSM_RANGE_PREFIX}
+  ^ip pim ${ECMP_REBALANCE}
+  ^ip pim ${ECMP}
+  ^ip pim rp ${RP_ADDRESS} prefix-list ${RP_PREFIX_LIST}
+  ^ip pim spt-switchover ${SPT_SWITCHOVER} prefix-list ${SPT_PREFIX_LIST}
+  ^ip pim rp ${RP_ADDRESS} ${RP_GROUP}
+  ^ip pim spt-switchover ${SPT_SWITCHOVER}
+  # If a line starts with '!', we have parsed all of the fields:
+  # Record the values and go back to 'Start'.
+  ^! -> Record Start
+
+
+Vrfconfig
+  # vrf conf starts with a space in front
+  ^\s+ip pim join-prune-interval ${JP_INTERVAL}
+  ^\s+ip pim keep-alive-timer ${KEEPALIVE_TIME}
+  ^\s+ip pim ssm prefix-list ${SSM_RANGE_PREFIX}
+  ^\s+ip pim ${ECMP_REBALANCE}
+  ^\s+ip pim ${ECMP}
+  ^\s+ip pim rp ${RP_ADDRESS} prefix-list ${RP_PREFIX_LIST}
+  ^\s+ip pim rp ${RP_ADDRESS} ${RP_GROUP}
+  ^\s+ip pim spt-switchover ${SPT_SWITCHOVER} prefix-list ${SPT_PREFIX_LIST}
+  ^\s+ip pim spt-switchover ${SPT_SWITCHOVER}
+  # If a line starts with '!', we have parsed all of the fields:
+  # Record the values and go back to 'Start'
+  ^! -> Record Start
+
+Ifconfig
+  # interface section rows starts with a space in front
+  ^\s+ip pim hello ${HELLO_INTVL}
+  ^\s+ip pim drpriority ${DR_PRIORITY}
+  ^\s+ip pim ${BFD_ENABLE}
+  ^\s+ip ${PIM_MODE}
+  ^\s+ip igmp last-member-query-count ${LAST_QUERY_COUNT}
+  ^\s+ip igmp last-member-query-interval ${LAST_QUERY_INTERVAL}
+  ^\s+ip igmp query-interval ${QUERY_INTERVAL}
+  ^\s+ip igmp join ${GROUP} ${SOURCE}
+  ^\s+ip igmp version ${VERSION}
+  ^\s+ip igmp query-max-response-time ${QUERY_MAX_RESPONSE}
+  # If a line starts with '!', we have parsed all of the fields:
+  # Record the values and go back to 'Start'
+  ^! -> Record Start
+
+EOF

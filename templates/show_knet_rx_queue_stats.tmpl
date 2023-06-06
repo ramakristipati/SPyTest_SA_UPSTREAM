@@ -1,0 +1,15 @@
+Value Filldown type (\S+)
+Value queue (\d+)
+Value rx_pkts (\d+)
+Value rx_errors (\d+)
+Value description ([\S\s]+)
+Value total (Total)
+
+Start
+  ^\s*${type}\s*Rx Queue Stats\s*$$
+  ^\s*Queue\s+Rx Pkts\s+Rx errors\s+Description\s*$$
+  ^\s*${queue}\s+${rx_pkts}\s+${rx_errors}\s+${description}\s*$$ -> Record
+  ^\s*${rx_errors}\s+${description}\s*$$ -> Record
+  ^\s*${total}\s+${rx_pkts}\s+${rx_errors}\s*$$ -> Record
+
+EOF

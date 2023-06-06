@@ -1,0 +1,7 @@
+Value TXQ (UC\d+|MC\d+)
+Value WRED_DPKT_COUNT (\d+)
+Value ECN_MPKT_COUNT (\d+)
+Value ECN_MPKT_BYTES (\d+)
+
+Start
+  ^${TXQ}\s+${WRED_DPKT_COUNT}\s+${ECN_MPKT_COUNT}\s+${ECN_MPKT_BYTES} -> Record

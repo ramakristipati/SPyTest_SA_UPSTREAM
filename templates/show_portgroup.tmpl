@@ -1,0 +1,15 @@
+######################CLICK Output ##############################
+# admin@sonic:~$ show portgroup
+#   portgroup          ports          valid speeds
+# -----------  -------------  --------------------
+#           1   Ethernet0-11  25000, [10000, 1000]
+#           2  Ethernet12-23  25000, [10000, 1000]
+#           3  Ethernet24-35  25000, [10000, 1000]
+#           4  Ethernet36-47  25000, [10000, 1000]
+#################################################################
+Value portgroup (\d+)
+Value ports ((Ethernet|Eth)[0-9/]+-[0-9/]+)
+Value valid_speeds ((\d+,?)+)
+
+Start
+  ^\s*${portgroup}\s+${ports}\s+${valid_speeds}\s*$$ -> Record

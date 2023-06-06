@@ -1,0 +1,14 @@
+#Timestamp             Interface  MAC-Address        Auth Status   Method
+#--------------------  ---------  -----------------  ------------  ------
+#May 07 2020 13:02:41  1/2      58:05:94:1C:00:00  Unauthorized  802.1X
+#May 07 2020 13:01:33  1/10     88:05:94:1C:00:00  authorized    802.1X
+##############################################################################
+Value timestamp (\w+\s+\d+\s+\d+\s+[\d\:]+)
+Value interface ([\w./]+)
+Value mac_addr ([\w\:]+)
+Value auth_status (\S+)
+Value method (\S+)
+
+Start
+  ^\s*${timestamp}\s+${interface}\s+${mac_addr}\s+${auth_status}\s+${method}\s*$$ -> Record
+  ^\s*${interface}\s+${mac_addr}\s+${auth_status}\s+${method}\s*$$ -> Record

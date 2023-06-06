@@ -1,0 +1,17 @@
+Value Filldown HOST (\S+)
+Value Filldown PORT (\d+)
+Value Filldown SRCINTF (\S+)
+Value Filldown VRF (\S+)
+Value Filldown MSG_TYPE (\w+)
+Value Filldown SEVERITY (\w+)
+
+Start
+  ^-+\s*
+  ^\s*HOST\s*PORT\s*SOURCE-INTERFACE\s*VRF\s*MESSAGE-TYPE\s*SEVERITY\s*
+  ^-+\s*
+  ^\s*${HOST}\s+${PORT}\s+${SRCINTF}\s+${VRF}\s+${MSG_TYPE}\s+${SEVERITY}\s* -> Record
+  ^\s*${HOST}\s+${PORT}\s+${SRCINTF}\s+${VRF}\s* -> Record
+  ^\s*${HOST}\s+${PORT}\s+${SRCINTF}\s+-+\s* -> Record
+  ^\s*${HOST}\s+${PORT}\s+-\s+-+\s* -> Record
+  
+EOF

@@ -1,0 +1,8 @@
+Value Key Id (\d+)
+Value Severity (\w+)
+Value Name (\w+)
+Value Timestamp ([A-Za-z-:.0-9]+)
+Value Description ([A-Za-z\s0-9.]+)
+
+Start
+ ^\s*${Id}\s*${Severity}\s*${Name}\s*${Timestamp}\s*${Description} -> Record

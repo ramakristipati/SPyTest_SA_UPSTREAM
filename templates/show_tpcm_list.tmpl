@@ -1,0 +1,10 @@
+Value CONT_NAME (\S+)
+Value IMAGE (\S+)
+Value VRF_RUN (\S+)
+Value VRF_CONF (\S+)
+Value STATUS (\w+)
+
+
+Start
+  ^\s*CONTAINER NAME\s+IMAGE TAG\s+VRF RUNNING/CONFIGURED\s+STATUS\s*$$
+  ^\s*${CONT_NAME}\s+${IMAGE}\s+${VRF_RUN}/${VRF_CONF}\s+${STATUS}\s* -> Record

@@ -1,0 +1,25 @@
+###############################################
+#FCMD: do show dot1x detail Eth 1/45
+#
+#Interface ..................................... Ethernet44
+#PAE Capabilities .............................. authenticator
+#Server Timeout(secs) .......................... 30
+#Quiet Period(secs)............................. 30
+################################################
+Value Required interface ([\w./]+)
+Value pae_capabilities (\S+)
+Value server_timeout (\d+)
+Value quiet_period (\d+)
+
+Start
+  ^\s*Port\s*PAE Capabilities\s*$$ -> Table
+  ^\s*Interface\s*\.+\s*${interface}\s*$$
+  ^\s*PAE\s+Capabilities\s*\.+\s*${pae_capabilities}\s*$$
+  ^\s*Server\s+Timeout\(secs\)\s*\.+\s*${server_timeout}\s*$$
+  ^\s*Quiet Period\(secs\)\s*\.+\s*${quiet_period}\s*$$ -> Record
+  ^\s*Interface\s*\.+\s*${interface}\s*$$ -> Start
+
+Table
+  ^\s*${interface}\s+${pae_capabilities}\s*$$ -> Record
+
+EOF

@@ -1,0 +1,13 @@
+Value dropping_flows (\d+)
+Value active_drop_reasons (\d+)
+Value active_drop_locations (\d+)
+Value active_drop_cpu (\d+)
+
+Start
+ ^\s*Number of Dropping Flows \s+:\s+${dropping_flows}\s*$$
+ ^\s*Number of Active Drop Reasons\s+:\s+${active_drop_reasons}\s*$$
+ ^\s*Number of Active Drop Locations\s+:\s+${active_drop_locations}\s*$$
+ ^\s*Number of Active Dropping CPU Queues\s+:\s+${active_drop_cpu}\s*$$ -> Record
+
+
+EOF

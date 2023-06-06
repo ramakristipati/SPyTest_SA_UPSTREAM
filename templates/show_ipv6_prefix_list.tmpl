@@ -1,0 +1,13 @@
+Value Required,Filldown LIST_NAME ([\w_]+)
+Value SEQ_NUM (\d{1,10})
+Value PREFIXTYPE ((permit)|(deny))
+Value PREFIXIPV6 ([\da-fA-F:]{2,39}\/\d{1,3})
+Value PREFIXGEVAL (\d{1,3})
+Value PREFIXLEVAL (\d{1,3})
+
+Start
+  ^\s*IPv6 prefix list ${LIST_NAME}:$$
+  ^\s*seq ${SEQ_NUM} ${PREFIXTYPE} ${PREFIXIPV6}( ge ${PREFIXGEVAL})( le ${PREFIXLEVAL}) -> Record
+  ^\s*seq ${SEQ_NUM} ${PREFIXTYPE} ${PREFIXIPV6}( ge ${PREFIXGEVAL}) -> Record
+  ^\s*seq ${SEQ_NUM} ${PREFIXTYPE} ${PREFIXIPV6}( le ${PREFIXLEVAL}) -> Record
+  ^\s*seq ${SEQ_NUM} ${PREFIXTYPE} ${PREFIXIPV6} -> Record

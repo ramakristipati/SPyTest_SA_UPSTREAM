@@ -1,0 +1,10 @@
+Value Country (\w+)
+Value Region (\S+)
+Value Timezone (\S+)
+Value TimeReference (.*)
+
+Start
+  ^${Country}\s\(${Timezone}, ${TimeReference}\)$$ -> Record
+  ^${Country}\/${Region}\s\(${Timezone}, ${TimeReference}\)$$ -> Record  
+
+EOF

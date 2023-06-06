@@ -1,0 +1,19 @@
+#######################################################################
+# show interface vlan-mappings dot1q-tunnel
+# ----------------------------------------------------------
+# Name           Vlan           dot1q-tunnel Vlan   Priority
+# ----------------------------------------------------------
+# Eth1/2         10             100                  -
+# Eth1/2         11-20          200                  4
+# Eth1/4         30,32,35-40    300                  2
+#######################################################################
+Value Required interface ([\w]+\s*[\d./]+)
+Value c_vlan_list ([\d+,-]+)
+Value Required s_vlan (\d+)
+Value vlan_priority (\d+|-)
+
+Start
+  ^\s*${interface}\s+${c_vlan_list}\s+${s_vlan}\s+${vlan_priority}\s*$$ -> Record
+  ^$$
+
+EOF

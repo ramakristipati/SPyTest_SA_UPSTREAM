@@ -1,0 +1,8 @@
+#Value result (\S+)
+#Value result (.*)
+Value result ([^"]*)
+
+Start
+  ^\s*"${result}"*$$ -> Record
+  ^$$
+

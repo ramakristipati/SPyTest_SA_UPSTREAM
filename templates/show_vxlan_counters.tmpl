@@ -1,0 +1,39 @@
+######################################################################################################################################################################
+# KLISH:
+#
+# sonic-cli# show vxlan counters <remoteip/all>
+# Polling Rate         : 8 seconds
+# -------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Interface             RX_BYTES_OK      RX_OK              RX_BPS             RX_PPS            TX_BYTES_OK      TX_OK              TX_BPS             TX_PPS
+# -------------------------------------------------------------------------------------------------------------------------------------------------------------
+# EVPN_4.4.4.4          3625             3625               0                  0                  3625             3625               0                  0
+# EVPN_4.4.4.5          35258            3525               0                  0                  35258460023423   3525848            0                  0
+#
+# CLICK:
+#
+# admin@sonic:~$ show vxlan counters <remoteip/all>
+# Last cached time was 2021-10-19 07:04:01.788672
+#        IFACE    RX_BYTES_OK    RX_OK    RX_BPS    RX_PPS     TX_BYTES_OK        TX_OK    TX_BPS    TX_PPS
+# ------------  -------------  -------  --------  --------  --------------  -----------  --------  --------
+# EVPN_4.4.4.4              0        0  0.00 B/s         0  45,611,813,640  262,136,860  0.00 B/s         0
+# EVPN_4.4.4.5              0        0  0.00 B/s         0  45,611,813,640  262,136,860  0.00 B/s         0
+# admin@sonic:~$
+######################################################################################################################################################################
+Value DIP (\d+\.\d+\.\d+\.\d+)
+Value RX_BYTES (\S+)
+Value RX_OK ([\d.,]+)
+Value RX_BPS ([\d.,]+)
+Value RX_PPS ([\d.,]+)
+Value TX_BYTES (\S+)
+Value TX_OK ([\d.,]+)
+Value TX_BPS ([\d.,]+)
+Value TX_PPS ([\d.,]+)
+Value Filldown vxlan_polling_interval (\d+)
+
+Start
+  ^\s*Polling\s*Rate\s*\:\s*${vxlan_polling_interval}.*\s*$$
+  ^\s*EVPN_${DIP}\s+${RX_BYTES}\s+${RX_OK}\s+${RX_BPS}\s+${RX_PPS}\s+${TX_BYTES}\s+${TX_OK}\s+${TX_BPS}\s+${TX_PPS}\s*$$ -> Record
+  ^\s*EVPN_${DIP}\s+${RX_BYTES}\s+${RX_OK}\s+${RX_BPS}\s[KMG]?B/s\s+${RX_PPS}\s+${TX_BYTES}\s+${TX_OK}\s+${TX_BPS}\s[KMG]?B/s\s+${TX_PPS}\s*$$ -> Record
+
+EOF
+

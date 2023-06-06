@@ -1,0 +1,15 @@
+##################################################################################
+#PIM SSM information for VRF: default
+#SSM group range :  pim_ssm_list_1
+# 
+#PIM SSM information for VRF: Vrf2
+#SSM group range : 232.0.0.0/8
+###################################################################################
+Value vrf (\w+)
+Value group_range (((\w+)|(232\.0\.0\.0\/8)))
+
+Start
+  ^\s*PIM SSM information for VRF:\s*${vrf}$$ 
+  ^\s*SSM group range\s*:\s*${group_range}$$ -> Record
+
+EOF

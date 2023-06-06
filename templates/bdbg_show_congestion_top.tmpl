@@ -1,0 +1,14 @@
+Value Buffer (\S+\s+\d+|\S+)
+Value Interface (\S+)
+Value Direction (\S+)
+Value SH (\d+)
+Value HR (\d+)
+Value UC (\d+)
+Value MC (\d+)
+Value Drops (\d+)
+Value Events (\d+)
+
+
+Start
+  ^\s*${Buffer}\s+${Interface}\s+${Direction}\s+${SH}\s+${HR}\s+${UC}\s+${MC}\s+${Drops}\s+${Events}\s*$$ -> Record
+  ^\s*${Buffer}\s+${SH}\s+${HR}\s+${UC}\s+${MC}\s+${Drops}\s+${Events}\s*$$ -> Record

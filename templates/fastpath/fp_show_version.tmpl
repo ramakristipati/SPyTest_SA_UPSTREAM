@@ -1,0 +1,39 @@
+Value description (.+)
+Value switch_type (.+)
+Value switch_model (.+)
+Value serial (.+)
+Value fru_number (.+)
+Value part_number (.+)
+Value maintenance_level (.+)
+Value manufacturer (.+)
+Value mac (\w+:\w+:\w+:\w+:\w+:\w+)
+Value version (.+)
+Value os_version (.+)
+Value network_processing_device (.+)
+Value cpld_version (.+)
+Value board_revision (.+)
+Value List additional_packages (.+)
+
+Start
+  # Captures show version for:
+  # Accton AS4610-54P, Accton AS5610-52X, Quanta LY2R, Quanta LB9, DNI AG3448P-R
+  # The following can be an empty value as it doesnt exist in all the models:
+  # FruNumber, PartNumber, CPLDversion, BoardRevision
+  ^\s*Switch\s*:\s*\d+\s*$$
+  ^\s*$$
+  ^\s*System\s*Description\s*\.+\s*${description}$$
+  ^\s*Machine\s*Type\s*\.+\s*${switch_type}$$
+  ^\s*Machine\s*Model\s*\.+\s*${switch_model}$$
+  ^\s*Serial\s*Number\s*\.+\s*${serial}$$
+  ^\s*FRU\s*Number\s*\.+\s*${fru_number}$$
+  ^\s*Part\s*Number\s*\.+\s*${part_number}$$
+  ^\s*Maintenance\s*Level\s*\.+\s*${maintenance_level}$$
+  ^\s*Manufacturer\s*\.+\s*${manufacturer}$$
+  ^\s*Burned\s*In\s*mac\s*Address\s*\.+\s*${mac}$$
+  ^\s*Software\s*Version\s*\.+\s*${version}$$
+  ^\s*Operating\s*System\s*\.+\s*${os_version}$$
+  ^\s*Network\s*Processing\s*Device\s*\.+\s*${network_processing_device}$$
+  ^\s*CPLD\s*version\s*\.+\s*${cpld_version}$$
+  ^\s*Board\s*Revision\s*\.+\s*${board_revision}$$
+  ^\s*Additional\s*Packages\s*\.+\s*${additional_packages}$$
+  ^\s+${additional_packages}$$

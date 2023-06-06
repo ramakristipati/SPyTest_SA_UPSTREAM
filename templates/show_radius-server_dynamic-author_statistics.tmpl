@@ -1,0 +1,29 @@
+#DAC Address........................................... 10.193.81.56
+#Number of CoA Requests Received....................... 0
+#Number of CoA ACK Responses Sent...................... 0
+#Number of CoA NAK Responses Sent...................... 0
+#Number of CoA Missing/Unsupported Attribute Requests.. 0
+#Number of CoA Session Context Not Found Requests...... 0
+#Number of CoA Invalid Attribute Value Requests........ 0
+#Number of Administratively Prohibited Requests........ 0
+###############################################################
+Value dac_addr (\S+)
+Value coa_requests_received (\d+)
+Value coa_ack_responses_sent (\d+)
+Value coa_nack_responses_sent (\d+)
+Value coa_miss_unsupp_attr_requests (\d+)
+Value coa_sesn_ctxt_not_found_requests (\d+)
+Value coa_invalid_attr_requests (\d+)
+Value coa_requests_ignored (\d+)
+Value admin_prohibited_requests (\d+)
+
+Start
+  ^\s*DAC\s+Address\s*\.+\s*${dac_addr}$$
+  ^\s*Number\s+of\s+CoA\s+Requests\s+Received\s*\.+\s*${coa_requests_received}$$
+  ^\s*Number\s+of\s+CoA\s+ACK\s+Responses\s+Sent\s*\.+\s*${coa_ack_responses_sent}$$
+  ^\s*Number\s+of\s+CoA\s+NAK\s+Responses\s+Sent\s*\.+\s*${coa_nack_responses_sent}$$
+  ^\s*Number\s+of\s+CoA\s+Missing/Unsupported\s+Attribute\s+Requests\s*\.+\s*${coa_miss_unsupp_attr_requests}$$
+  ^\s*Number\s+of\s+CoA\s+Session\s+Context\s+Not\s+Found\s+Requests\s*\.+\s*${coa_sesn_ctxt_not_found_requests}$$
+  ^\s*Number\s+of\s+CoA\s+Invalid\s+Attribute\s+Value\s+Requests\s*\.+\s*${coa_invalid_attr_requests}$$
+  ^\s*Number\s+of\s+CoA\s+Requests\s+Ignored\s*\.+\s*${coa_requests_ignored}$$
+  ^\s*Number\s+of\s+Administratively\s+Prohibited\s+Requests\s*\.+\s*${admin_prohibited_requests}$$ -> Record

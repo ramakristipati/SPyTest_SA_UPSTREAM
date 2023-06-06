@@ -1,0 +1,16 @@
+Value total (\d+)
+Value critical (\d+)
+Value major (\d+)
+Value minor (\d+)
+Value warning (\d+)
+Value ack (\d+)
+
+Start
+ ^\s*Total:\s+${total}\s*$$
+ ^\s*Critical:\s+${critical}\s*$$
+ ^\s*Major:\s+${major}\s*$$
+ ^\s*Minor:\s+${minor}\s*$$
+ ^\s*Warning:\s+${warning}\s*$$
+ ^\s*Acknowledged:\s+${ack}\s*$$ -> Record
+
+EOF

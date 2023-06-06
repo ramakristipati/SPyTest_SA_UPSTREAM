@@ -1,0 +1,47 @@
+Value last_ran (\S+\s*\S+)
+Value time_taken (.*)
+Value result (\w+)
+Value Filldown addr_family (\w+)
+Value Filldown vrf (\w+)
+Value Filldown result_appdb (\w+)
+Value Filldown result_asicdb (\w+)
+Value Filldown result_fib (\w+)
+Value Filldown result_sai (\w+)
+Value Filldown layer (\w+)
+Value Filldown layer_type (\w+)
+Value Filldown prefix (\S+)
+Value Filldown mask (\d+)
+Value Filldown prefix_text (.*)
+Value Filldown uneq_ribnum (\d+)
+Value Filldown uneq_layernum (\d+)
+Value uneq_intf (\S*)
+Value uneq_ip (\S*)
+Value uneq_mac (\S*)
+
+Start
+  ^\s*Last Route consistency check ran at ${last_ran} took ${time_taken} seconds\s*$$
+  ^\s*Final Route consistency check status: ${result}\s*$$ -> Record
+  ^\s*Route check for vrf ${vrf} and address-family ${addr_family}:\s*$$ -> Continue.Clearall
+  ^\s*Route check for vrf ${vrf} and address-family ${addr_family}:\s*$$ -> Record
+  ^\s*rib_vs_appdb: ${result_appdb}\s*$$ -> Continue
+  ^\s*rib_vs_asicdb: ${result_asicdb}\s*$$ -> Continue
+  ^\s*rib_vs_fib: ${result_fib}\s*$$ -> Continue
+  ^\s*rib_vs_sai: ${result_sai}\s*$$ -> Continue
+  ^\s*rib_vs_${layer}: .*\s*$$ -> Record
+  ^\s*Prefixes in rib not available in ${layer_type}:\s*$$
+  ^\s*Prefixes in (appdb|asicdb|fib|sai) not available in ${layer_type}:\s*$$
+  ^\s*${layer_type} prefixes:\s*$$
+  #^\s*${prefix}/${mask} - ${prefix_text}: -> UNEQPREFIX
+  ^\s*${prefix}/${mask} - ${prefix_text}:\s*$$
+  ^\s*rib:${uneq_ribnum}\s*$$
+  ^\s*(appdb|asicdb|fib|sai):${uneq_layernum}\s*$$
+  ^\s*\(${uneq_intf}, ${uneq_ip}, ${uneq_mac}\)\s*$$ -> Record
+  ^\s*${prefix}/${mask} -> Record
+  
+UNEQPREFIX
+  ^\s*rib:${uneq_ribnum}\s*$$
+  ^\s*(appdb|asicdb|fib|sai):${uneq_layernum}\s*$$
+  ^\s*\(${uneq_intf}, ${uneq_ip}, ${uneq_mac}\)\s*$$ -> Record
+  ^\s*(rib_vs|Route) -> Continue
+  ^$$ -> Start
+  

@@ -1,0 +1,12 @@
+Value INTERVAL (\d+)
+Value UDLD (\S+)
+Value BPDUGUARD (\S+)
+Value link_flap (\S+)
+
+Start
+  ^\s*udld\s*${UDLD}\s*$$
+  ^\s*bpduguard\s*${BPDUGUARD}\s*$$
+  ^\s*link-flap\s*${link_flap}\s*$$
+  ^\s*Timeout for Auto-recovery:\s*${INTERVAL}\s*seconds\s*$$ -> Record
+
+EOF

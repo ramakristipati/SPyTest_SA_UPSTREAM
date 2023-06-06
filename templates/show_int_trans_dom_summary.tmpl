@@ -1,0 +1,11 @@
+Value port (Eth\S+)
+Value type (\S+)
+Value vendor (\S+|[\S\s\S]+)
+Value temperature (\S+)
+Value voltage (\S+)
+Value rx1_power (\S+)
+Value tx1_power (\S+)
+
+Start
+  ^\s*${port}\s+${type}\s+${vendor}\s+${temperature}\s+${voltage}\s+${rx1_power}\s+${tx1_power}\s*$$ -> Record
+  ^\s*${port}\s+${vendor}\s+${temperature}\s+${voltage}\s+${rx1_power}\s+${tx1_power}\s*$$ -> Record

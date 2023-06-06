@@ -1,0 +1,13 @@
+Value half_life_time (\d+)
+Value reuse_limit (\d+)
+Value suppress_limit (\d+)
+Value max_suppress_time (\d+)
+Value max_suppress_limit (\d+)
+
+Start
+  ^\s*("halfLifeSecs"|Half-life time):\s*${half_life_time}
+  ^\s*("reusePenalty"|Reuse penalty):\s*${reuse_limit}
+  ^\s*("suppressPenalty"|Suppress penalty):\s*${suppress_limit}
+  ^\s*("maxSuppressTimeSecs"|Max suppress time):\s*${max_suppress_time}
+  ^\s*("maxSuppressPenalty"|Max suppress penalty):\s*${max_suppress_limit}
+

@@ -1,0 +1,14 @@
+#show dot1x
+#
+#Administrative Mode............... Enabled
+#EAPOL Flood Mode.................. Disabled
+#Software Version.................. 1
+################################################
+Value admin_mode (\S+)
+Value eapol_flood_mode (\S+)
+Value version (\d+)
+
+Start
+  ^\s*Administrative\s+Mode\s*\.+\s*${admin_mode}
+  ^\s*EAPOL\s+Flood\s+Mode\s*\.+\s*${eapol_flood_mode}
+  ^\s*Software\s+Version\s*\.+\s*${version} -> Record

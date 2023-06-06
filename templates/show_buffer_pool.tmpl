@@ -1,0 +1,14 @@
+Value Required BUFFER_POOL (ingress_lossless_pool|egress_lossless_pool)
+Value Fillup MODE (static|dynamic)
+Value Fillup SIZE (\d+)
+Value Fillup TYPE (egress|ingress)
+Value Fillup SHARED_HEADROOM_SIZE (\d+)
+
+
+Start
+  ^\s*${BUFFER_POOL}\:$$ 
+  ^\s*size\s*\:\s*${SIZE}\s*bytes\s*$$
+  ^\s*size\s*\:\s*${SIZE}$$
+  ^\s*type\s*\:\s*${TYPE}\s*$$ 
+  ^\s*shared-headroom-size\s*\:\s*${SHARED_HEADROOM_SIZE}$$ 
+  ^\s*mode\s*\:\s*${MODE}\s*$$ -> Record

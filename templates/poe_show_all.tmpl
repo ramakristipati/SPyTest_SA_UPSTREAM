@@ -1,0 +1,19 @@
+Value interface (\S+)
+Value class (\S+)
+Value det (\S+)
+Value cap (\S+)
+Value conn (\S+)
+Value set (\S+)
+Value pwr (\S+)
+Value ext (\S+)
+Value short (\S+)
+Value single (\S+)
+Value mps (\S+)
+Value inrush (\S+)
+
+Start
+  ^\s*class\s+det\s+cap\s+conn\s+set\s+pwr\s+ext\s+short\s+single\s+mps\s+inrush\s*$$ -> TYPE1
+
+TYPE1
+  ^\s*:${interface}\s+${class}\s+${det}\s+${cap}\s+${conn}\s+${set}\s+${pwr}\s+${ext}\s+${short}\s+${single}\s+${mps}\s+${inrush}\s*$$ -> Record
+

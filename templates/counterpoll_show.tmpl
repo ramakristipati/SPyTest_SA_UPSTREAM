@@ -1,0 +1,30 @@
+######################################################################################################################################################################
+# admin@sonic:~$ counterpoll show
+# Type         Interval (in ms)    Status
+# -----------  ------------------  --------
+# QUEUE_STAT   default (10000)     enable
+# PORT_STAT    default (1000)      enable
+# RIF_STAT     default (1000)      enable
+# TUNNEL_STAT  10000               enable
+# PHY_STAT     default (60000)     enable
+# admin@sonic:~$
+######################################################################################################################################################################
+Value queue_stat_polling_interval (\d+)
+Value port_stat_polling_interval (\d+)
+Value rif_stat_polling_interval (\d+)
+Value vxlan_polling_interval (\d+)
+Value phy_stat_polling_interval (\d+)
+
+Start
+  ^\s*QUEUE_STAT\s+default\s\(${queue_stat_polling_interval}\)\s+enable\s*$$
+  ^\s*PORT_STAT\s+default\s*\(${port_stat_polling_interval}\)\s+enable\s*$$
+  ^\s*RIF_STAT\s+default\s*\(${rif_stat_polling_interval}\)\s+enable\s*$$
+  ^\s*TUNNEL_STAT\s+default\s*\(${vxlan_polling_interval}\)\s+enable\s*$$
+  ^\s*PHY_STAT\s+default\s*\(${phy_stat_polling_interval}\)\s+enable\s*$$ -> Record
+  ^\s*QUEUE_STAT\s+${queue_stat_polling_interval}\s+enable\s*$$
+  ^\s*PORT_STAT\s+${port_stat_polling_interval}\s+enable\s*$$
+  ^\s*RIF_STAT\s+${rif_stat_polling_interval}\s+enable\s*$$
+  ^\s*TUNNEL_STAT\s+${vxlan_polling_interval}\s+enable\s*$$
+  ^\s*PHY_STAT\s+${phy_stat_polling_interval}\s+enable\s*$$ -> Record
+
+EOF

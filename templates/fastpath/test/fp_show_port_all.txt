@@ -1,0 +1,26 @@
+
+                 Admin     Physical   Physical   Link   Link    LACP   Actor
+Intf      Type   Mode      Mode       Status     Status Trap    Mode   Timeout
+--------- ------ --------- ---------- ---------- ------ ------- ------ --------
+0/1              Enable    Auto       1000 Full  Up     Enable  Enable long
+0/2              Enable    Auto       1000 Full  Up     Enable  Enable long
+0/3              Enable    Auto       1000 Full  Up     Enable  Enable long
+0/4              Enable    Auto       1000 Full  Up     Enable  Enable long
+0/5              Enable    Auto                  Down   Enable  Enable long
+0/6              Enable    Auto                  Down   Enable  Enable long
+0/7              Enable    Auto                  Down   Enable  Enable long
+0/8              Enable    Auto                  Down   Enable  Enable long
+0/9              Enable    Auto                  Down   Enable  Enable long
+0/10             Enable    Auto                  Down   Enable  Enable long
+0/11             Enable    Auto                  Down   Enable  Enable long
+0/12             Enable    Auto                  Down   Enable  Enable long
+0/13             Enable    10G Full   10G Full   Up     Enable  Enable long
+0/14             Enable    10G Full   10G Full   Up     Enable  Enable long
+3/1              Enable                          Down   Disable N/A    N/A
+3/2              Enable                          Down   Disable N/A    N/A
+3/3              Enable                          Down   Disable N/A    N/A
+3/4              Enable                          Down   Disable N/A    N/A
+3/5              Enable                          Down   Disable N/A    N/A
+3/6              Enable                          Down   Disable N/A    N/A
+
+

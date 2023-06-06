@@ -1,0 +1,15 @@
+Value Device (\S+)
+Value BusAddress (\S+)
+Value Input_Output_error (\d+)
+Value Timeout_error (\d+)
+Value Busbusy_error (\d+)
+Value Nack_error (\d+)
+Value Arbitartion_error (\d+)
+Value Timestamp (\S+\s+\S+)
+Value Message_string (I2C .*|No I2C error stats data available for \S+)
+
+Start
+  ^\s*${Device}\s+${BusAddress}\s+${Input_Output_error}\s+${Timeout_error}\s+${Busbusy_error}\s+${Nack_error}\s+${Arbitartion_error}\s+${Timestamp}\s*$$ -> Record
+  ^\s*${Message_string}\s*$$ -> Record
+
+EOF

@@ -1,0 +1,28 @@
+Value Counter (\S+)
+Value Alias (\S+)
+Value Group (\w+)
+Value Type (PORT_INGRESS_DROPS|PORT_MIRROR_SUPPORTED_INGRESS_DROPS|SWITCH_EGRESS_DROPS)
+Value Mirror (\S+)
+Value Reason_list ([\S,]+)
+Value Description ([\S\s]+)
+Value Status (\w+)
+
+Start
+  ^\s*Counter\s+Alias\s+Group\s+Type\s+Mirror\s+Reasons\s*$$ -> Drop_Counter
+  ^(-\s*)*$$ -> Drop_Counter_Detail
+
+Drop_Counter
+  ^\s*${Counter}\s+${Alias}\s+${Group}\s+${Type}\s+${Reason_list}\s*$$ -> Record
+  ^\s*${Counter}\s+${Alias}\s+${Group}\s+${Type}\s+${Mirror}\s+${Reason_list}\s*$$ -> Record
+
+Drop_Counter_Detail
+  ^\s*Counter\s+:\s+${Counter}
+  ^\s*Description\s+:\s+${Description}
+  ^\s*Alias\s+:\s+${Alias}
+  ^\s*Group\s+:\s+${Group}
+  ^\s*Type\s+:\s+${Type}
+  ^\s*Mirror\s+:\s+${Mirror}
+  ^\s*Reasons\s+:\s+${Reason_list}
+  ^\s*Status\s+:\s+${Status} -> Record
+
+EOF

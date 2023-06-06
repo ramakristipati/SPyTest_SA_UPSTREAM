@@ -1,0 +1,49 @@
+#Interface ..................................... Ethernet0
+#Port Control Mode.............................. auto
+#Host Mode...................................... multi_host
+#Open Authentication............................ Disabled
+#Authentication Restart timer................... 30
+#Configured method order........................ dot1x mab
+#Enabled method order........................... dot1x undefined
+#Configured method priority..................... dot1x mab
+#Enabled method priority........................ dot1x undefined
+#Reauthentication Enabled....................... FALSE
+#Reauthentication Session timeout from server .. TRUE
+#Reauthentication Period (secs)................. 120
+#Maximum Users.................................. 48
+#Guest VLAN ID.................................. 0
+#Authentication retry attempts.................. 3
+#Unauthenticated VLAN ID........................ 0
+###########################################################
+Value Required interface ([\w./]+)
+Value port_control_mode (\S+)
+Value host_mode (\S+)
+Value open_auth (\S+)
+Value auth_order_configured ([\S\s]+)
+Value auth_order_enabled ([\S\s]+)
+Value auth_priority_configured ([\S\s]+)
+Value auth_priority_enabled ([\S\s]+)
+Value reauth (\S+)
+Value reauth_session_timeout_from_server (\S+)
+Value reauth_period (\d+)
+Value max_users (\d+)
+Value guest_vlan (\d+)
+Value auth_retry_attempts (\d+)
+Value unauthenticated_vlan (\d+)
+
+Start
+  ^\s*Interface\s*\.+\s*${interface}$$
+  ^\s*Port\s+Control\s+Mode\s*\.+\s*${port_control_mode}$$
+  ^\s*Host\s+Mode\s*\.+\s*${host_mode}$$
+  ^\s*Open\s+Authentication\s*\.+\s*${open_auth}$$
+  ^\s*Configured\s+method\s+order\s*\.+\s*${auth_order_configured}$$
+  ^\s*Enabled\s+method\s+order\s*\.+\s*${auth_order_enabled}$$
+  ^\s*Configured\s+method\s+priority\s*\.+\s*${auth_priority_configured}$$
+  ^\s*Enabled\s+method\s+priority\s*\.+\s*${auth_priority_enabled}$$
+  ^\s*Reauthentication\s+Enabled\s*\.+\s*${reauth}$$
+  ^\s*Reauthentication\s+Session\s+timeout\s+from\s+server\s*\.+\s*${reauth_session_timeout_from_server}$$
+  ^\s*Reauthentication\s+Period\s+\(secs\)\.+\s*${reauth_period}\s*$$
+  ^\s*Maximum\s+Users\s*\.+\s*${max_users}$$
+  ^\s*Guest\s+VLAN\s+ID\s*\.+\s*${guest_vlan}$$
+  ^\s*Authentication\s+retry\s+attempts\s*\.+\s*${auth_retry_attempts}$$
+  ^\s*Unauthenticated\s+VLAN\s+ID\s*\.+\s*${unauthenticated_vlan}$$ -> Record

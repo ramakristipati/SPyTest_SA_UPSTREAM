@@ -1,0 +1,22 @@
+Value Filldown mst_instance ([\d\-\,]+)
+Value Filldown vlan_map ([\d\-\,]+)
+Value Filldown bridge_address ([\w.]+)
+Value Filldown root_address ([\w.]+)
+Value Filldown path_cost (\d+)
+Value Filldown rem_hops (\d+)
+Value Filldown interface ([\w./]+)
+Value Filldown root_port (\S+)
+Value role (\S+)
+Value state (\S+)
+Value cost (\d+)
+Value prio_nbr ([\d\.\d]+)
+Value type ([\S\s]+)
+
+Start
+  ^\s*#####\s*MST${mst_instance}\s*Vlans\s*mapped:\s*${vlan_map}\s*$$
+  ^\s*Bridge\s*Address\s*${bridge_address}\s*$$
+  ^\s*Root\s*Address\s*${root_address}\s*$$
+  ^\s*Port\s+${root_port}\s+Path\s+cost\s*${path_cost}\s*Rem\s+hops\s*${rem_hops}\s*$$
+  ^\s*${interface}\s*${role}\s*${state}\s*${cost}\s*${prio_nbr}\s*${type}\s*$$ -> Record
+
+EOF

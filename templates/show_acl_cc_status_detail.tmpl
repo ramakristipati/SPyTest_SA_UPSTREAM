@@ -1,0 +1,57 @@
+Value Filldown access_list_name (\S+)
+Value Filldown acl_type (\S+)
+Value rule_no (\d+)
+Value intf ([\w./]+)
+Value data ((Not Found)|\S+)
+Value appdb_status ((Not Found)|\S+)
+Value asicdb_status ((Not Found)|\S+)
+Value hw_status ((Not Found)|\S+)
+Value ext_appdb_entries (\d+)
+Value appdb_entry_id (\d+)
+Value appdb_port (\S+)
+Value appdb_dst_ip (\S+)
+Value appdb_seq (\d+)
+Value appdb_action (\S+)
+Value ext_asicdb_entries (\d+)
+Value asicdb_entry_id (\d+)
+Value asicdb_port (\S+)
+Value asicdb_dst_ip (\S+)
+Value asicdb_protocol (\S+)
+Value asicdb_seq (\d+)
+Value asicdb_action (\S+)
+
+Start
+  ^\s*ACL\s+consistency\s+status\s+for\s+${acl_type}acl\-${access_list_name}\s*$$
+  ^\s*\=+\s*$$
+  ^\s*Seq\s+Binding\s+Data\s+AppDB\s+ASICDB\s+HW\s*$$
+  ^\s*\=+\s*$$
+  ^\s*${rule_no}\s+${intf}\s{1,3}${data}\s{1,3}${appdb_status}\s{1,3}${asicdb_status}\s{1,3}${hw_status}\s*$$ -> Record
+  ^\s*${rule_no}\s+${intf}\s{1,3}${data}\s{1,3}${appdb_status}\s{1,3}${asicdb_status}\s{1,3}\s*$$ -> Record
+  ^\s*${rule_no}\s+${intf}\s{1,3}${data}\s{1,3}${appdb_status}\s{1,30}${hw_status}\s*$$ -> Record
+  ^\s*${rule_no}\s+${intf}\s{1,3}${data}\s{1,3}${appdb_status}\s*$$ -> Record
+  ^\s*${rule_no}\s+${intf}\s{1,3}${data}\s{1,25}${asicdb_status}\s{1,3}${hw_status}\s*$$ -> Record
+  ^\s*${rule_no}\s+${intf}\s{1,3}${data}\s{1,25}${asicdb_status}\s*$$ -> Record
+  ^\s*${rule_no}\s+${intf}\s{1,3}${data}\s{1,40}${hw_status}\s*$$ -> Record
+  ^\s*${rule_no}\s+${intf}\s{1,25}${appdb_status}\s{1,3}${asicdb_status}\s{1,3}${hw_status}\s*$$ -> Record
+  ^\s*${rule_no}\s+${intf}\s{1,25}${appdb_status}\s{1,3}${asicdb_status}\s*$$ -> Record
+  ^\s*${rule_no}\s+${intf}\s{1,25}${appdb_status}\s{1,30}${hw_status}\s*$$ -> Record
+  ^\s*${rule_no}\s+${intf}\s{1,25}${appdb_status}\s*$$ -> Record
+  ^\s*${rule_no}\s+${intf}\s{1,45}${asicdb_status}\s{1,3}${hw_status}\s*$$ -> Record
+  ^\s*${rule_no}\s+${intf}\s{1,45}${asicdb_status}\s*$$ -> Record
+  ^\s*${rule_no}\s+${intf}\s{55,70}${hw_status}\s*$$ -> Record
+  ^\s*Extra\s+entries\s+in\s+ApplDB\:\s*${ext_appdb_entries}\s*$$
+  ^\s*Entry\s+${appdb_entry_id}\s+for\s+port\s+${appdb_port}\:\s*$$
+  ^\s*DstIP\s*\=\s*${appdb_dst_ip}\s*$$
+  ^\s*Seq\s*\=\s*${appdb_seq}\s*$$
+  ^\s*Action\s*\=\s*${appdb_action}\s*$$ -> Record
+  ^\s*Extra\s+entries\s+in\s+ASIC\s*DB\:\s*${ext_asicdb_entries}\s*$$ -> ExtraAsicDB
+
+ExtraAsicDB
+  ^\s*Extra\s+entries\s+in\s+ASIC\s*DB\:\s*${ext_asicdb_entries}\s*$$
+  ^\s*Entry\s+${asicdb_entry_id}\s+for\s+port\s+${asicdb_port}\:\s*$$
+  ^\s*DstIP\s*\=\s*${asicdb_dst_ip}\s*$$
+  ^\s*Protocol\s*\=\s*${asicdb_protocol}\s*$$
+  ^\s*Seq\s*\=\s*${asicdb_seq}\s*$$
+  ^\s*Action\s*\=\s*${asicdb_action}\s*$$ -> Record
+
+EOF

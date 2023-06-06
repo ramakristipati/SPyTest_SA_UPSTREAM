@@ -1,0 +1,63 @@
+####################################################
+# CLICK:
+# ------
+# show vxlan interface
+# VTEP Information:
+# VTEP Name : vtepLeaf1, SIP  : 34.34.34.1
+# NVO Name  : nvo1,  VTEP : vtepLeaf1
+# Source interface  : Loopback3
+# admin@sonic:~$
+#
+# KLISH:
+# ------
+# sonic(config)# do show vxlan interface
+#
+# VTEP Name        :  vtepLeaf1
+# VTEP Source IP   :  34.34.34.1
+# VTEP Primary IP  :  3.3.3.2
+# EVPN NVO Name    :  nvo1
+# EVPN VTEP        :  vtepLeaf1
+# Source Interface :  Loopback3
+# Primary IP interface : Loopback1
+# sonic(config)#
+#
+#VTEP Name        :  vtep1
+#VTEP Source IP   :  1.1.1.1
+#VTEP Primary IP  :  2.2.2.2
+#VTEP External IP :  10.10.10.10
+#EVPN NVO Name    :  nvo1
+#EVPN VTEP        :  vtep1
+#Downstream VNI   : External, 192.168.2.100
+#Source Interface :  Loopback10
+#Primary IP interface : Loopback20
+#External IP interface: Loopback30
+#####################################################
+Value VTEP_NAME (\S+)
+Value SIP (\d+\.\d+\.\d+\.\d+)
+Value PIP (\d+\.\d+\.\d+\.\d+)
+Value EIP (\d+\.\d+\.\d+\.\d+)
+Value NVO_NAME (\S+)
+Value SRC_INTF ([\w.\s/]+)
+Value PIP_INTF ([\w.\s/]+)
+Value EIP_INTF ([\w.\s/]+)
+Value QOS_MODE (\S+)
+Value PIPE_DSCP (\d+)
+Value DVNI_TYPE (External)
+Value DVNI_VTEP (\d+\.\d+\.\d+\.\d+)
+
+Start
+  ^\s*VTEP Name\s*:\s*${VTEP_NAME},\s*SIP\s*:\s*${SIP}\s*
+  ^\s*NVO Name\s*:\s*${NVO_NAME}\s*
+  ^\s*Source (I|i)nterface\s*:\s*${SRC_INTF}\s*
+  ^\s*VTEP Name\s*:\s*${VTEP_NAME}\s*
+  ^\s*VTEP Source IP\s*:\s*${SIP}\s*
+  ^\s*VTEP Primary IP\s*:\s*${PIP}\s*
+  ^\s*(VTEP\s+)*External IP\s*:\s*${EIP}\s*
+  ^\s*Primary\s?IP (I|i)nterface\s*:\s*${PIP_INTF}\s*
+  ^\s*External\sIP (I|i)nterface\s*:\s*${EIP_INTF}\s*
+  ^\s*Downstream VNI\s*:(\s*${DVNI_TYPE},)*(\s*${DVNI_VTEP}\s*)*
+  ^\s*Qo[S|s] Mode\s*:\s*${QOS_MODE}\s*\(dscp:${PIPE_DSCP}\)\s*
+  ^\s*Qo[S|s] Mode\s*:\s*${QOS_MODE}\s*
+  ^$$
+
+

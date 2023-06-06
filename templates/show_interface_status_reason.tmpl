@@ -1,0 +1,12 @@
+Value Filldown interface (\S+)
+Value event (\S+)
+Value timestamp ([\S\s]*)
+
+Start
+  ^\s*\---+\s*$$
+  ^\s*Name\s+Event\s+Timestamp\s*$$
+  ^\s*\---+\s*$$
+  ^\s*${interface}\s+${event}\s+${timestamp}\s*$$ -> Record
+  ^\s*${event}\s+${timestamp}\s*$$ -> Record
+
+EOF

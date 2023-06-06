@@ -1,0 +1,9 @@
+Value interface ([\w/.]+)
+Value flap_threshold (\d+)
+Value sampling_interval (\d+)
+Value recovery_interval (\d+)
+Value time_left (\S+)
+Value status (Err-disabled|Not-errdisabled|On|Off)
+
+Start
+  ^${interface}\s+${flap_threshold}\s+${sampling_interval}\s+${recovery_interval}\s+${time_left}\s+${status}\s*$$ -> Record

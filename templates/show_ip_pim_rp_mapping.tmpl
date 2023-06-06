@@ -1,0 +1,14 @@
+Value Filldown vrf (\w+)
+Value rp_address ([\w\.]+)
+Value group_prefix_list ([\w\.\/]+)
+Value rp_mode (\w+)
+Value rp_version (\w+)
+
+
+Start
+  ^\s*VRF:\s*${vrf}$$
+  ^\s*Group\(s\)\s*:\s*${group_prefix_list}\s*,\s*${rp_mode}\s*$$
+  ^\s*RP\s*:\s*${rp_address}\s*,\s*${rp_version}\s*$$ -> Record
+
+
+EOF

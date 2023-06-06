@@ -1,0 +1,12 @@
+Value FILESYSTEM ([\/\w\-]+)
+Value TOTAL_SIZE ([\d\.\w]+)
+Value USED_SIZE ([\d\.\w]+)
+Value AVAILABLE_SIZE ([\d\.\w]+)
+Value USED_PERCENT ([\d\%]+)
+Value MOUNTED_ON ([\/\w]+)
+
+Start
+  ^\s+Filesystem\s+Size\s+Used\s+Avail\s+Use\%\s+Mounted on\s*$$
+  ^(-+\s*)*$$
+  ^${FILESYSTEM}\s+${TOTAL_SIZE}\s+${USED_SIZE}\s+${AVAILABLE_SIZE}\s+${USED_PERCENT}\s+${MOUNTED_ON}\s*$$ -> Record
+  ^$$

@@ -1,0 +1,14 @@
+Value interface (Ethernet\d+|Eth\S+)
+Value scheduler_policy (\S+|\s+)
+Value dscp_fg (\S+|\s+)
+Value dot1p_fg (\S+|\s+)
+Value fg_queue (\S+|\s+)
+Value fg_pg (\S+|\s+)
+Value fg_dscp (\S+|\s+)
+Value fg_dot1p (\S+|\s+)
+Value pfc_p2q (\S+|\s+)
+Value asym_mode (\S+|\s+)
+
+Start
+  ^(-+\s)*$$  
+  ^${interface}\s*\|\s*${scheduler_policy}\|\s+${dscp_fg}\s{1,5}${dot1p_fg}\s{1,5}${fg_queue}\s{1,5}${fg_pg}\s{1,5}${fg_dscp}\s{1,5}${fg_dot1p}\s{1,5}${pfc_p2q}\|\s*${asym_mode} -> Record

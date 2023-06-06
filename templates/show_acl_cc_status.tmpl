@@ -1,0 +1,15 @@
+Value status (.+)
+Value Filldown acl_status (.+)
+Value Filldown acl_type (.+)
+Value Filldown acl_num (\d+)
+Value Filldown acl_entries_num (\d+)
+Value last_ran (.*)
+Value time_taken (.*)
+
+Start
+  ^\s*Final status: ${status}*$$ -> Record
+  ^\s*${acl_type} access-list consistency status: ${acl_status}*$$ -> Record
+  ^\s*ACLs checked: ${acl_num}
+  ^\s*ACL entries checked: ${acl_entries_num}*$$ -> Record
+  ^\s*Last ran on ${last_ran} and took ${time_taken} seconds\s*$$ -> Record
+

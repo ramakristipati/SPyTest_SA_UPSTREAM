@@ -1,0 +1,8 @@
+Value date ([\d \-\:]+)
+Value size ([\d]+)
+Value type (\S)
+Value file_name (\S+)
+
+Start
+  ^\s*${date}\s+${size}\s+${type}\s+${file_name}\s*$$ -> Record
+

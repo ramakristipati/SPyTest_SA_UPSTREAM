@@ -1,0 +1,34 @@
+####################################################################
+#show config session details
+#Session Name     : --
+#Session Token    : 1665096805-3
+#Session State    : Active (PID 276)
+#Created by       : admin
+#Created at        : 2022-11-18 18:46:13+0000
+#Last Resumed at  : 2022-10-06 22:53:25+0000
+#Last Exited at   : 2022-10-06 22:53:25+0000
+#Last Activity at : 2022-10-06 22:53:25+0000
+#Transaction Size : 0
+####################################################################
+Value Session_name (\S+)
+Value Session_token (\S+)
+Value Session_state (\S+\s+\(.*\)|\S+\s*)
+Value Created_by (\S+)
+Value Created_at (\S+)
+Value Last_resume (\S+\s+\S+)
+Value Last_exited (\S+\s+\S+)
+Value Last_activity (\S+\s\S+)
+Value Transaction_size (\S+)
+
+Start
+  ^Session Name\s*:\s*$Session_name$$
+  ^Session Token\s*:\s*$Session_token$$
+  ^Session State\s*:\s*$Session_state$$
+  ^Created by\s*:\s*$Created_by$$
+  ^Created at\s*:\s*$Created_at$$
+  ^Last Resumed at\s*:\s*$Last_resume$$
+  ^Last Exited at\s*:\s*$Last_exited$$
+  ^Last Activity at\s*:\s*$Last_activity$$
+  ^Transaction Size\s*:\s*$Transaction_size$$ -> Record
+
+

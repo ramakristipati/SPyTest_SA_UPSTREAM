@@ -1,0 +1,17 @@
+Value Filldown access_list_name (\S+)
+Value Filldown acl_type (\S+)
+Value rule_no (\d+)
+Value intf ([\w./]+)
+Value appdb_status (\S+)
+Value asicdb_status (\S+)
+Value hw_status (\S+)
+
+
+Start
+  ^\s*ACL\s+consistency\s+status\s+for\s+${acl_type}acl\-${access_list_name}\s*$$
+  ^\s*\=+\s*$$
+  ^\s*Seq\s+Binding\s+AppDB\s+ASICDB\s+HW\s*$$
+  ^\s*\=+\s*$$
+  ^\s*${rule_no}\s+${intf}\s+${appdb_status}\s+${asicdb_status}\s+${hw_status}\s*$$ -> Record
+
+EOF

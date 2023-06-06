@@ -1,0 +1,20 @@
+#A1# show mclag peer-gateway-interfaces 
+#MCLAG Peer Gateway interface not configured
+#A1#
+#A1# show mclag peer-gateway-interfaces 
+#Interface Name  
+#==============  
+#Vlan20          
+#Vlan21          
+#==============  
+#Total count :    2
+#==============  
+#A1#
+Value Required VLAN (\w+)
+Value Fillup COUNT (\d+)
+
+Start
+  ^\s*MCLAG Peer Gateway interface ${VLAN} configured -> Record
+  ^\s*Peer Gateway configuration ${VLAN} enabled on any interface -> Record
+  ^\s*Vlan${VLAN} -> Record
+  ^\s*Total count\s*:\s*${COUNT}

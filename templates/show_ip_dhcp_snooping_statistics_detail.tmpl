@@ -1,0 +1,32 @@
+Value dhcp_rx_error (\d+)
+Value msg_too_big_error (\d+)
+Value invalid_src_ip_error (\d+)
+Value invalid_src_mac_error (\d+)
+Value dhcp_tx_error (\d+)
+Value dhcp_msg_intercepted (\d+)
+Value dhcp_msg_processed (\d+)
+Value dhcp_msg_filtered (\d+)
+Value dhcp_msg_forwarded (\d+)
+Value Rx_REL_or_DEC_from_client_not_in_bind_db (\d+)
+Value binding_entries_added (\d+)
+Value binding_entries_removed (\d+)
+Value rx_error_mac_verify_fail (\d+)
+Value pkts_dropped_static_binding_exists (\d+)
+Value pkts_dropped_intf_error (\d+)
+
+Start
+  ^\s*Error receiving from DHCP snooping socket\s*:\s*${dhcp_rx_error}\s*$$
+  ^\s*DHCP message too big\s*:\s*${msg_too_big_error}\s*$$
+  ^\s*Illegal source IP address in snooped packet\s*:\s*${invalid_src_ip_error}\s*$$
+  ^\s*Illegal source MAC in snooped packet\s*:\s*${invalid_src_mac_error}\s*$$
+  ^\s*Error sending from DHCP snooping socket\s*:\s*${dhcp_tx_error}\s*$$
+  ^\s*Number of DHCP messages intercepted\s*:\s*${dhcp_msg_intercepted}\s*$$
+  ^\s*Number of DHCP messages processed\s*:\s*${dhcp_msg_processed}\s*$$
+  ^\s*Number of DHCP messages filtered\s*:\s*${dhcp_msg_filtered}\s*$$
+  ^\s*Number of DHCP messages forwarded\s*:\s*${dhcp_msg_forwarded}\s*$$
+  ^\s*Rx RELEASE or DECLINE from client not in bindings db\s*:\s*${Rx_REL_or_DEC_from_client_not_in_bind_db}\s*$$
+  ^\s*Number of bindings added to bindings table\s*:\s*${binding_entries_added}\s*$$
+  ^\s*Number of bindings removed from bindings table\s*:\s*${binding_entries_removed}\s*$$
+  ^\s*MAC verification failures/server frames recvd on untrusted ports\s*:\s*${rx_error_mac_verify_fail}\s*$$
+  ^\s*Number of DHCP messages dropped as static binding exists\s*:\s*${pkts_dropped_static_binding_exists}\s*$$
+  ^\s*Packets dropped due to no outgoing interface or interface down\s*:\s*${pkts_dropped_intf_error}\s*$$ -> Record

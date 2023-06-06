@@ -1,0 +1,10 @@
+Value IMAGE_ID (\d+)
+Value IMAGE_NAMES (\S+)
+Value IMAGE_STATE (\w+)
+Value IMAGE_STATUS (\w+)
+Value START_DATE ([\s\d\.\-\:]+)
+Value END_DATE ([\s\d\.\-\:]+)
+
+Start
+  ^\s*Id\s+Tag\s+State\s+Status\s+Start\s+End\s*$$
+  ^\s*${IMAGE_ID}\s+${IMAGE_NAMES}\s+${IMAGE_STATE}\s+${IMAGE_STATUS}\s+${START_DATE}\s+${END_DATE}\s* -> Record

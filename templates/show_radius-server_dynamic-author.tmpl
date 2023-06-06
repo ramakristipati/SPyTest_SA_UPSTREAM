@@ -1,0 +1,41 @@
+#AdminMode...................................... Enabled
+#Port........................................... 3799
+#Auth Type...................................... all
+#Global Secret Key.............................. N/A
+#Ignore server-key.............................. Disabled
+#Ignore session-key............................. Disabled
+#CoA Bounce-Host-Port........................... Accept
+#CoA Disable-Host-Port.......................... Accept
+#--------------------------------------------------------------------
+#Client Address                Secret
+#--------------------------------------------------------------------
+#1.1.1.1                       N/A
+###############################################################
+Value Filldown admin_mode (\S+)
+Value Filldown port (\d+)
+Value Filldown auth_type (\S+)
+Value Filldown global_secret_key (\S+)
+Value Filldown ignore_server_key (\S+)
+Value Filldown ignore_session_key (\S+)
+Value Filldown coa_bounce_host_port (\S+)
+Value Filldown coa_disable_host_port (\S+)
+Value Filldown vrf_name (\S+|Not Configured)
+Value client_address (\S+)
+Value secret_key (\S+)
+
+Start
+  ^\s*AdminMode\s*\.+\s*${admin_mode}$$
+  ^\s*Port\s*\.+\s*${port}$$
+  ^\s*Auth\s+Type\s*\.+\s*${auth_type}$$
+  ^\s*Global\s+Secret\s+Key\s*\.+\s*${global_secret_key}$$
+  ^\s*Ignore\s+Server\s+Key\s*\.+\s*${ignore_server_key}$$
+  ^\s*Ignore\s+Session\s+Key\s*\.+\s*${ignore_session_key}$$
+  ^\s*CoA\s+Bounce-Host-Port\s*\.+\s*${coa_bounce_host_port}$$
+  ^\s*CoA\s+Disable-Host-Port\s*\.+\s*${coa_disable_host_port}$$
+  ^\s*VRF\s*\.+\s*${vrf_name}$$
+  ^--------------------------------------------------------------------
+  ^Client Address                Secret
+  ^--------------------------------------------------------------------
+  ^\s*${client_address}\s+${secret_key}\s*$$ -> Record
+
+#EOF

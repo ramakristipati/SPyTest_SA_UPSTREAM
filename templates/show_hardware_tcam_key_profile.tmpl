@@ -1,0 +1,15 @@
+Value Filldown profile_type (\S+)
+Value Filldown key_profile (\S+)
+Value qualifier ([\w/\s]+)
+Value ingress_dir (Yes|No)
+Value egress_dir (Yes|No)
+
+Start
+  ^\s*Details of ${profile_type} key-profile:
+  ^\s*Details of ${profile_type} key-profile for ${key_profile}:
+  ^\-\S+
+  ^\s*Qualifiers\s*Ingress\s*Egress
+  ^\-\S+
+  ^\s*${qualifier}\s*${ingress_dir}\s*${egress_dir} -> Record
+
+EOF

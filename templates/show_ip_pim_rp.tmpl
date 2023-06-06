@@ -1,0 +1,11 @@
+Value Filldown vrf (\w+)
+Value rp ([\d\.]+)
+Value group ([\d\.]+)
+
+
+Start
+  ^\s*VRF:\s*${vrf}$$
+  ^\s*${group}\s*${rp}\s*$$ -> Record 
+
+
+EOF

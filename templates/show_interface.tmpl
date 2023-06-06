@@ -1,0 +1,54 @@
+Value Filldown Interface (\S+)
+Value Filldown Status (\w+)
+Value Filldown Line_Protocol (\w+)
+Value Filldown Hardware (\w+)
+Value Filldown MAC (\S+)
+Value Filldown Index (\d+)
+Value Filldown IP_addr ([\d.]+)
+Value Filldown IP_mode (\w+)
+Value Filldown IPv6_addr ([A-Fa-f\d:]+)
+Value Filldown IPv6_mode (\w+)
+Value Filldown MTU (\d+)
+Value Filldown Speed (\w+)
+Value Filldown Autoneg (\S+)
+Value RX_packets (\d+)
+Value RX_octets (\d+)
+Value RX_multicasts (\d+)
+Value RX_broadcasts (\d+)
+Value RX_unicasts (\d+)
+Value RX_error (\d+)
+Value RX_discarded (\d+)
+Value TX_packets (\d+)
+Value TX_octets (\d+)
+Value TX_multicasts (\d+)
+Value TX_broadcasts (\d+)
+Value TX_unicasts (\d+)
+Value TX_error (\d+)
+Value TX_discarded (\d+)
+Value List Event_list (\S+)
+Value List Timestamp_list (\S+)
+Value Filldown Reason (\S+)
+
+Start
+  ^\s*${Interface} is ${Status}, line protocol is ${Line_Protocol}(, reason ${Reason})*
+  ^\s*Hardware is ${Hardware}(, address is ${MAC})?
+  ^\s*Interface index is ${Index}
+  ^\s*IPV4 address is ${IP_addr}
+  ^\s*Mode of IPV4 address assignment: ${IP_mode}
+  ^\s*IPV6 address is ${IPv6_addr}
+  ^\s*Mode of IPV6 address assignment: ${IPv6_mode}
+  ^\s*IP MTU ${MTU} bytes
+  ^\s*LineSpeed ${Speed}, Auto-negotiation ${Autoneg}
+  ^\s*Events\s*:\s*$$
+  ^\s*${Event_list}\s+at\s+${Timestamp_list}\s*
+  ^\s*Input statistics:
+  ^\s*${RX_packets} packets, ${RX_octets} octets
+  ^\s*${RX_multicasts} Multicasts, ${RX_broadcasts} Broadcasts, ${RX_unicasts} Unicasts
+  ^\s*${RX_error} error, ${RX_discarded} discarded
+  ^\s*Output statistics: -> TX_Stats
+
+TX_Stats
+  ^\s*${TX_packets} packets, ${TX_octets} octets
+  ^\s*${TX_multicasts} Multicasts, ${TX_broadcasts} Broadcasts, ${TX_unicasts} Unicasts
+  ^\s*${TX_error} error, ${TX_discarded} discarded
+

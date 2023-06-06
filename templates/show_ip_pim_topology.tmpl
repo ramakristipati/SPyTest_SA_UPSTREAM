@@ -1,0 +1,51 @@
+##################################################################################
+#PIM Multicast Routing Table for VRF: default
+#Flags: S - Sparse, C - Connected, L - Local, P - Pruned,
+#R - RP-bit set, F - Register Flag, T - SPT-bit set, J - Join SPT,
+#K - Ack-Pending state
+# 
+#(71.0.0.11, 233.0.0.1), uptime 4d08h13m, expires Never, flags SCJT
+#  Incoming interface: Vlan71, RPF neighbor 71.0.0.11
+#  Outgoing interface list:
+#    Vlan100         uptime/expiry-time: 4d08h12m/00:03:43
+#    Vlan191         uptime/expiry-time: 4d08h13m/00:02:57
+#    Ethernet12      uptime/expiry-time: 4d08h13m/00:03:10
+#    Ethernet1/11/2  uptime/expiry-time: 4d08h13m/00:03:10
+#    PortChannel7    uptime/expiry-time: 4d08h13m/00:03:10
+###################################################################################
+Value Filldown vrf (\S+)
+Value Filldown source (\S+)
+Value Filldown group (\S+)
+Value Filldown rt_uptime (\S+)
+Value Filldown rt_expiry (\S+)
+Value Filldown flags ([SCLPRFTJK]*)
+Value Filldown iif (\S+)
+Value Filldown rpf_nbr (\S+)
+Value Filldown metric (\d+)
+Value Filldown pref (\d+)
+# OIF list
+Value oif (\S+)
+Value oif_uptime (\S+)
+Value oif_expiry (\S+)
+
+Start
+  ^\s*PIM multicast routing table for VRF:\s*${vrf}$$ -> KLISH
+  ^\s*.*VRF\s*\:\s*${vrf}\s*$$ -> VTYSH
+
+KLISH
+  ^\s*\(${source},\s${group}\), uptime ${rt_uptime}, expires ${rt_expiry}, flags ${flags}$$
+  ^\s*Incoming interface: ${iif}, RPF neighbor ${rpf_nbr}$$
+  ^\s*${iif}, RPF neighbor: ${rpf_nbr}, RPF Metric: ${metric}, RPF Preference: ${pref}$$
+  ^\s*${oif}\s*uptime\/expiry\-time:\s*${oif_uptime}\/${oif_expiry}$$ -> Record
+  ^\s*PIM multicast routing table for VRF:\s*${vrf}$$
+
+VTYSH
+  ^Flags:.*$$ -> Continue
+  ^\s*\(${source},\s+${group}\),\s+uptime\s+${rt_uptime},\s+expires\s+${rt_expiry},\s+flags\s+${flags}\s*$$
+  ^\s*Incoming\s+interface:\s+${iif},\s+RPF\s+neighbor\s+${rpf_nbr}\s*$$
+  ^\s*Outgoing\s+interface\s+list:\s*$$
+  ^\s*${oif}\s+uptime/expiry-time:\s+${oif_uptime}/${oif_expiry}\s*$$ -> Record
+  ^\s*.*VRF\s*\:\s*${vrf}\s*$$
+
+
+EOF

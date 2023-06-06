@@ -1,0 +1,12 @@
+Value POLICY_NAME (\S+)
+Value ECN_MODE (\S+)
+Value green_min_threshold (\S+)
+Value green_max_threshold (\d+)
+Value green_drop_probability (\d+)
+
+Start
+  ^Policy\s*:\s${POLICY_NAME}
+  ^ecn\s*:\s${ECN_MODE}
+  ^green-min-threshold\s*:\s${green_min_threshold}
+  ^green-max-threshold\s*:\s${green_max_threshold}
+  ^green-drop-probability\s*:\s${green_drop_probability}

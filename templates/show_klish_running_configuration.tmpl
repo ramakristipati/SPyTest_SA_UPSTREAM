@@ -1,0 +1,57 @@
+Value VRF ([\w_]+)
+Value JP_INTERVAL (\d+)
+Value KEEPALIVE_TIME (\d+)
+Value SSM_RANGE_PREFIX (\w+)
+Value ECMP (ecmp)
+Value ECMP_REBALANCE (ecmp\srebalance)
+Value INTERFACE (\w+\s*[\d/.]+)
+Value HELLO_INTVL (\d+)
+Value DR_PRIORITY (\d+)
+Value BFD_ENABLE (bfd)
+Value PIM_MODE ([\w\-]+)
+Value RP_ADDRESS ([\d\.]+)
+Value SPT_SWITCHOVER (\w+)
+Value RP_PREFIX_LIST (\w+)
+Value SPT_PREFIX_LIST (\w+)
+
+Start
+  # Parse global configuration until the start of interface
+  # configuration.
+  # If a line starts with 'interface' go to IfconfigScan section
+  ^interface ${INTERFACE} -> IfconfigScan
+   # Put capture strings for global configuration items here.
+  ^ip pim vrf ${VRF} join-prune-interval ${JP_INTERVAL}$$ -> Record
+  ^ip pim vrf ${VRF} keep-alive-timer ${KEEPALIVE_TIME}$$ -> Record
+  ^ip pim vrf ${VRF} ssm prefix-list ${SSM_RANGE_PREFIX}$$ -> Record
+  ^ip pim vrf ${VRF} ${ECMP_REBALANCE}$$ -> Record
+  ^ip pim vrf ${VRF} ${ECMP}$$ -> Record
+  ^ip pim vrf ${VRF} rp-address ${RP_ADDRESS}$$ -> Record
+  ^ip pim vrf ${VRF} spt-threshold ${SPT_SWITCHOVER}$$ -> Record
+  ^ip pim vrf ${VRF} rp-address ${RP_ADDRESS} prefix-list ${RP_PREFIX_LIST}$$ -> Record
+  ^ip pim vrf ${VRF} spt-threshold ${SPT_SWITCHOVER} prefix-list ${SPT_PREFIX_LIST}$$ -> Record
+
+
+IfconfigScan
+  # Interface section rows starts with a space in front. Avoid recording unless
+  # configuration is found for an entry type that needs to be stored. In that
+  # case, transition to "IfconfigStore" state.
+  ^\s+ip pim hello ${HELLO_INTVL} -> IfconfigStore
+  ^\s+ip pim drpriority ${DR_PRIORITY} -> IfconfigStore
+  ^\s+ip pim ${BFD_ENABLE} -> IfconfigStore
+  ^\s+ip pim ${PIM_MODE} -> IfconfigStore
+  # A line beginning with '!' marks the end of configuration for this interface:
+  # There is no PIM configuratio for this interface, so
+  # go back to 'Start' state without recording.
+  ^! -> Start
+
+IfconfigStore
+  ^\s+ip pim hello ${HELLO_INTVL}
+  ^\s+ip pim drpriority ${DR_PRIORITY}
+  ^\s+ip pim ${BFD_ENABLE}
+  ^\s+ip pim ${PIM_MODE}
+  ^! -> Record Start
+  # A line beginning with '!' marks the end of configuration for this interface:
+  # Record any captured PIM configuration for the interface and go back to 'Start'
+  # state.
+
+EOF

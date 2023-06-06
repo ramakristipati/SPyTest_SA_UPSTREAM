@@ -1,0 +1,11 @@
+Value port ((Ethernet|Eth)[0-9/]+)
+Value type (\w+.*)
+Value autoneg (on|off)
+Value adv_speeds ([0-9,]+)
+
+Start
+  ^\s*${port}\s+${type}\s+${autoneg}\s+${adv_speeds}\s*$$ -> Record
+  ^\s*${port}\s+${autoneg}\s+${adv_speeds}\s*$$ -> Record
+  ^\s*${port}\s+${type}\s+${autoneg}\s*$$ -> Record
+  ^\s*${port}\s+${autoneg}\s*$$ -> Record
+

@@ -1,0 +1,7 @@
+Value drops (\d+)
+Value reason_location (\S+)
+Value count (\d+)
+
+Start
+  ^\s*Number of Drop .*:\s+${drops}\s*$$
+  ^\s*${reason_location}\s+${count}\s*$$ -> Record

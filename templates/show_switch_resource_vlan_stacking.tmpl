@@ -1,0 +1,12 @@
+#################################################################################
+# sonic# show switch-resource vlan-stacking
+# Configured  : enabled
+# Operational : enabled
+# sonic#
+#################################################################################
+Value qinq_conf_state (\w+)
+Value qinq_oper_state (\w+)
+
+Start
+  ^\s*Configured\s*:\s*${qinq_conf_state}$$
+  ^\s*Operational\s*:\s*${qinq_oper_state}$$ -> Record

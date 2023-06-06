@@ -1,0 +1,18 @@
+Value dynamic_bindings (\d+)
+Value static_bindings (\d+)
+Value tentative_bindings (\d+)
+Value List mac_addr_list ([\w\d\:]+)
+Value List interface_list ([\w/.]+)
+Value List ip_addr_list ([\w:]+|[\w.]+)
+Value List vlan_list (\d+)
+Value List binding_type_list (\w+)
+Value List lease_time_list ([\d]+|[\S]+)
+
+Start
+  ^\s*Total number of Dynamic bindings:\s+${dynamic_bindings}\s*$$
+  ^\s*Total number of Static bindings:\s+${static_bindings}\s*$$
+  ^\s*Total number of Tentative bindings:\s+${tentative_bindings}\s*$$
+  ^\s*MAC Address        IP Address      VLAN  Interface    Type       Lease (secs)
+  ^\s*${mac_addr_list}\s*${ip_addr_list}\s*${vlan_list}\s*${interface_list}\s*${binding_type_list}\s*${lease_time_list}\s*$$
+
+

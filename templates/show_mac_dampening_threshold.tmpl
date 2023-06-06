@@ -1,0 +1,8 @@
+Value count (\d+)
+Value interval (\d+)
+
+Start
+#Common line in both Click and Klish
+  ^\s*MAC\s+Move\s+Dampening\s+Threshold\s*:\s*${count}\s*$$
+#Following line is only in klish
+  ^\s*MAC\s+Move\s+Dampening\s+Interval\s*:\s*${interval}\s*$$

@@ -1,0 +1,10 @@
+Value source_port ([\w/.]+)
+Value is_enabled (Y|N)
+Value max_secure_addr (\d+)
+Value fdb_count (\d+)
+Value violation_count (\d+)
+Value security_action (\S+)
+
+
+Start
+  ^\s*${source_port}\s+${is_enabled}\s+${max_secure_addr}\s+${fdb_count}\s+${violation_count}\s+${security_action}\s*$$ -> Record

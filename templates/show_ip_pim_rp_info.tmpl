@@ -1,0 +1,13 @@
+Value Filldown vrf (\w+)
+Value rp_address ([\w\.]+)
+Value group_prefix_list ([\w\.\/]+)
+Value oif (\S+)
+Value i_am_rp (\w+)
+Value source (\w+)
+
+
+Start
+  ^\s*VRF:\s*${vrf}$$
+  ^\s*${rp_address}\s*${group_prefix_list}\s*${oif}\s*${i_am_rp}\s*${source}$$ -> Record
+
+EOF

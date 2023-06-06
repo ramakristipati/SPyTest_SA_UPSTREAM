@@ -1,0 +1,16 @@
+Value interface (\S+)
+Value type (\S+)
+Value admin (Enable|Disable)
+Value mode (10G Full|Auto)
+Value status (1000 Full|10G Full)
+Value oper (Up|Down)
+Value trap (Enable|Disable)
+Value lacp (Enable|Disable|N/A)
+Value timeout (long|N/A)
+
+Start
+  ^\s*${interface}\s*${type}\s*${admin}\s*${mode}\s*${status}\s*${oper}\s*${trap}\s*${lacp}\s*${timeout}\s*$$ -> Record
+  ^\s*${interface}\s*${admin}\s*${mode}\s*${status}\s*${oper}\s*${trap}\s*${lacp}\s*${timeout}\s*$$ -> Record
+  ^\s*${interface}\s*${admin}\s*${mode}\s*${oper}\s*${trap}\s*${lacp}\s*${timeout}\s*$$ -> Record
+  ^\s*${interface}\s*${admin}\s*${oper}\s*${trap}\s*${lacp}\s*${timeout}\s*$$ -> Record
+

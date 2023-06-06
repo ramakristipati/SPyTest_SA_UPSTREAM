@@ -1,0 +1,81 @@
+####################################################
+#sonic# show ip pim multicast
+#
+#PIM multicast information for VRF: default
+#VRF Name :default
+#
+#Total Dynamic Multicast Routes In VRF :6
+#Total Dynamic Uninstalled Multicast Routes In VRF :0
+#
+#Total Dynamic Multicast Routes Across All VRFs :12
+#Total Dynamic Uninstalled Multicast Routes Across All VRFs :0
+#
+#Upstream Join Timer in secs :60
+#JoinPrune Holdtime in secs :210
+#PIM ECMP :Disable
+#PIM ECMP Rebalance :Disable
+#
+#rpfCacheRefreshDelayMsecs :50
+#rpfCacheRefreshTimer :0
+#rpfCacheRefreshRequests :3
+#rpfCacheRefreshEvents :3
+#rpfCacheRefreshLast :00:28:06
+#nexthopLookups :14
+#nexthopLookupsAvoided :0
+#
+#Multicast Count:
+#---------------
+#Interface         State     Address           ifIndex     Vif       PktsIn         PktsOut        BytesIn        BytesOut
+#Vlan81            up        81.0.0.3          123         2         0              0              0              0
+#Vlan91            up        91.0.0.3          124         3         0              0              0              0
+#Vlan191           up        191.0.0.3         126         1         0              0              0              0
+#Vlan200           up        200.0.0.3         120         4         0              0              0              0
+#Vlan201           up        201.0.0.3         121         5         0              0              0              0
+####################################################
+Value Filldown vrf_name (\S+)
+Value Filldown dynamic_mc_routes (\d+)
+Value Filldown dynamic_unistalled_mc_routes (\d+)
+Value Filldown dynamic_mc_routes_across_all_vrfs (\d+)
+Value Filldown dynamic_unistalled_mc_routes_across_all_vrfs (\d+)
+Value Filldown upstream_join_timer (\d+)
+Value Filldown joinprune_hold_time (\d+)
+Value Filldown pim_ecmp (\S+)
+Value Filldown pim_ecmp_rebalance (\S+)
+Value Filldown rpf_cache_refresh_delay (\d+)
+Value Filldown rpf_cache_refresh_timer (\d+)
+Value Filldown rpf_cache_refresh_request (\d+)
+Value Filldown rpf_cache_refresh_events (\d+)
+Value Filldown rpf_cache_refresh_last ([\d\:wdhm]+)
+Value Filldown next_hop_lookups (\d+)
+Value Filldown next_hop_lookups_avoided (\d+)
+Value interface ([\w/.]+)
+Value state (\S+)
+Value address ([\w\.]+)
+Value ifindex (\d+)
+Value vif (\d+)
+Value pktsin (\d+)
+Value pktsout (\d+)
+Value bytesin (\d+)
+Value bytesout (\d+)
+
+Start
+  ^\s*PIM multicast information for VRF:\s*${vrf_name}\s*$$
+  ^\s*VRF\s*Name\s*:${vrf_name}$$
+  ^\s*Total\s*Dynamic\s*Multicast\s*Routes\s*In\s*VRF\s*:${dynamic_mc_routes}$$
+  ^\s*Total\s*Dynamic\s*Uninstalled\s*Multicast\s*Routes\s*In\s*VRF\s*:${dynamic_unistalled_mc_routes}$$
+  ^\s*Total\s*Dynamic\s*Multicast\s*Routes\s*Across\s*All\s*VRFs\s*:${dynamic_mc_routes_across_all_vrfs}$$
+  ^\s*Total\s*Dynamic\s*Uninstalled\s*Multicast\s*Routes\s*Across\s*All\s*VRFs\s*:${dynamic_unistalled_mc_routes_across_all_vrfs}$$
+  ^\s*Upstream\s*Join\s*Timer\s*in\s*secs\s*:${upstream_join_timer}$$
+  ^\s*JoinPrune\s*Holdtime\s*in\s*secs\s*:${joinprune_hold_time}$$
+  ^\s*PIM\s*ECMP\s*:${pim_ecmp}$$
+  ^\s*PIM\s*ECMP\s*Rebalance\s*:${pim_ecmp_rebalance}$$
+  ^\s*rpfCacheRefreshDelayMsecs\s*:${rpf_cache_refresh_delay}$$
+  ^\s*rpfCacheRefreshTimer\s*:${rpf_cache_refresh_timer}$$
+  ^\s*rpfCacheRefreshRequests\s*:${rpf_cache_refresh_request}$$
+  ^\s*rpfCacheRefreshEvents\s*:${rpf_cache_refresh_events}$$
+  ^\s*rpfCacheRefreshLast\s*:${rpf_cache_refresh_last}$$
+  ^\s*nexthopLookups\s*:${next_hop_lookups}$$
+  ^\s*nexthopLookupsAvoided\s*:${next_hop_lookups_avoided}$$
+  ^\s*${interface}\s*${state}\s*${address}\s*${ifindex}\s*${vif}\s*${pktsin}\s*${pktsout}\s*${bytesin}\s*${bytesout} -> Record
+
+EOF

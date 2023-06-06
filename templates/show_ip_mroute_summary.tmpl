@@ -1,0 +1,36 @@
+##################################################################################
+#IP multicast routing table summary for VRF: default
+#Mroute Type  Installed/Total
+#(*,G)        1/1
+#(S,G)        3/3
+#--------
+#Total        4/4
+#---------
+# 
+#IP multicast routing table summary for VRF: Vrf_RED
+#Mroute Type  Installed/Total
+#(*,G)        1/1
+#(S,G)        1/1
+#--------
+#Total        2/2
+#---------
+###################################################################################
+Value Filldown vrf (\w+)
+Value starG_installed (\d+)
+Value starG_total (\d+)
+Value SG_installed (\d+)
+Value SG_total (\d+)
+Value vrf_total_installed (\d+)
+Value vrf_total (\d+)
+
+Start
+  ^\s*IP multicast routing table summary for VRF:\s*${vrf} -> KLISH
+  ^\s*VRF:\s*${vrf}$$
+  ^\s*\(\*,\s*G\)\s*${starG_installed}\/${starG_total}$$ 
+  ^\s*\(S,\s*G\)\s*${SG_installed}\/${SG_total}$$ 
+  ^\s*Total\s*${vrf_total_installed}\/${vrf_total}$$ -> Record
+
+KLISH
+  ^\s*\(S,\s*G\)\s*${SG_installed}\/${SG_total}$$ -> Record
+
+EOF

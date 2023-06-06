@@ -1,0 +1,51 @@
+#Mac Address.................................... 58:05:94:1C:00:00
+#User Name...................................... testixia
+#VLAN Assigned Reason........................... Voice VLAN (100)
+#Host Mode ..................................... Multi-auth
+#Method......................................... 802.1X
+#Control Mode................................... Auto
+#Session time ... .............................. 10
+#Session timeout (RADIUS) ........................... 60
+#Session timeout (Oper) ............................. 300
+#Time left for Session Termination Action....... 90
+#Session Termination Action..................... Default
+#Filter-Id ..................................... None
+#ACS ACL Name................................... xACSACLx-IP-FP_ACL-5ee227a2
+#DACL........................................... None
+#Redirect ACL ....................................... ACSACL-IP-D_RACL-62d8efde
+#Redirect URL ....................................... https://ISE-HYD-LAB.ISE-HYD-LAB:8443/portal/gateway?sessionId=0a348bbeDmDVUH2hDD51CkEo66o2Ue9Ft1ePbhD1qT40xVR6kjQ&portal=40f01bd0-2e02-11e8-ba71-005056872c7f&action=cpp&token=1018c70e072b804e379769caf8439141
+##############################################################################
+Value mac_addr ([\w\:]+)
+Value username (\S+)
+Value vlan_assigned_reason (.*)
+Value host_mode (\S+)
+Value method (\S+)
+Value control_mode (\S+)
+Value session_time (\S+)
+Value session_timeout (.*)
+Value session_timeout_oper (.*)
+Value time_left_termination (.*)
+Value termination_action (\S+)
+Value filter_id (\S+)
+Value acs_acl_name (\S+)
+Value dynamic_acl (\S+)
+Value redirect_acl (\S+)
+Value redirect_url (\S+)
+
+Start
+  ^\s*Mac\s+Address\s*\.+\s*${mac_addr}\s*$$
+  ^\s*User\s+Name\s*\.+\s*${username}\s*$$
+  ^\s*VLAN\s+Assigned\s+Reason\s*\.+\s*${vlan_assigned_reason}\s*$$
+  ^\s*Host\s+Mode\s*\.+\s*${host_mode}\s*$$
+  ^\s*Method\s*\.+\s*${method}\s*$$
+  ^\s*Control\s+Mode\s*\.+\s*${control_mode}\s*$$
+  ^\s*Session\s+time\s*\.+\s*${session_time}\s*$$
+  ^\s*Session\s+timeout\s*\(RADIUS\)\s*\.+\s*${session_timeout}\s*$$
+  ^\s*Session\s+timeout\s*\(Oper\)\s*\.+\s*${session_timeout_oper}\s*$$
+  ^\s*Time\s+left\s+for\s+Session\s+Termination\s+Action\s*\.+\s*${time_left_termination}\s*$$
+  ^\s*Session\s+Termination\s+Action\s*\.+\s*${termination_action}\s*$$
+  ^\s*Filter\-Id\s*\.+\s*${filter_id}\s*$$
+  ^\s*ACS\s+ACL\s+Name\s*\.+\s*${acs_acl_name}\s*$$
+  ^\s*DACL\s*\.+\s*${dynamic_acl}\s*$$
+  ^\s*Redirect\s+ACL\s*\.+\s*${redirect_acl}\s*$$
+  ^\s*Redirect\s+URL\s*\.+\s*${redirect_url}\s*$$ -> Record

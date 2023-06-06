@@ -1,0 +1,12 @@
+Value total (\d+)
+Value raised (\d+)
+Value ack (\d+)
+Value cleared (\d+)
+
+Start
+ ^\s*Total:\s+${total}\s*$$
+ ^\s*Raised:\s+${raised}\s*$$
+ ^\s*Acknowledged:\s+${ack}\s*$$
+ ^\s*Cleared:\s+${cleared}\s*$$ -> Record
+
+EOF

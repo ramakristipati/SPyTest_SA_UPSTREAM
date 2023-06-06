@@ -1,0 +1,17 @@
+Value source_port ([\w/.]+)
+Value is_enabled (True|False)
+Value max_secure_addr (\d+)
+Value fdb_count (\d+)
+Value violation_count (\d+)
+Value security_action (\S+)
+
+
+Start
+  ^\s*Interface : ${source_port}\s*$$
+  ^\s*Port MAC Security is Enabled : ${is_enabled}\s*$$
+  ^\s*Maximum allowed Secure MAC   : ${max_secure_addr}\s*$$
+  ^\s*Action taken on Violation    : ${security_action}\s*$$
+  ^\s*Total MAC address            : ${fdb_count}\s*$$
+  ^\s*Security Violation Count     : ${violation_count}\s*$$ -> Record
+
+EOF

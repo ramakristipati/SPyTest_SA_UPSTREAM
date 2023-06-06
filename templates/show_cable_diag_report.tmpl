@@ -1,0 +1,15 @@
+Value Interface ((Ethernet|Eth)[0-9/]+)
+Value Type (TDR|XCVR)
+Value Length (< \S+m|>= \S+m|\d+.*m|N/A)
+Value Result (OK|OPEN|SHORT|OPENSHORT|CROSSTALK|UNKNOWN|FAILED|Not Present|Not Supported)
+Value Status (COMPLETED|IN-PROGRESS|SUBMITTED|FAILED)
+Value Timestamp (\d+.*M|\d+.*\d)
+
+
+Start
+  ^\s*${Interface}\s+${Type}\s+${Length}\s*${Result}\s+${Status}\s+${Timestamp}\s*$$ -> Record
+  ^\s*${Interface}\s+${Type}\s+${Result}\s+${Status}\s+${Timestamp}\s*$$ -> Record
+  ^\s*${Interface}\s+${Length}\s*${Result}\s+${Status}\s+${Timestamp}\s*$$ -> Record
+  ^\s*${Interface}\s+${Result}\s+${Status}\s+${Timestamp}\s*$$ -> Record
+  ^\s*${Interface}\s+${Status}\s*$$ -> Record
+  ^\s*${Interface}\s+${Result}\s+${Status}\s+${Timestamp}\s*$$ -> Record

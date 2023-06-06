@@ -1,0 +1,36 @@
+Value Filldown mst_instance ([\d\-\,]+)
+Value Filldown vlan_map ([\d\-\,]+)
+Value Filldown bridge_address ([\w.]+)
+Value Filldown root_address ([\w.]+)
+Value Filldown regional_root_address ([\w.]+)
+Value Filldown config_hello_time (\d+)
+Value Filldown config_fwd_delay (\d+)
+Value Filldown config_max_age (\d+)
+Value Filldown oper_hello_time (\d+)
+Value Filldown oper_fwd_delay (\d+)
+Value Filldown oper_max_age (\d+)
+Value Filldown txholdcount (\d+)
+Value Filldown max_hops (\d+)
+Value Filldown internal_cost (\d+)
+Value Filldown rem_hops (\d+)
+Value Filldown path_cost (\d+)
+Value Filldown interface ([\w./]+)
+Value Filldown root_port (\S+)
+Value port_role (\S+)
+Value port_state (\S+)
+Value port_cost (\d+)
+Value port_prio_nbr ([\d.\d]+)
+Value port_type ([\S\s]+)
+
+Start
+  ^\s*#+\s+MST${mst_instance}\s+Vlans\s+mapped\:\s+${vlan_map}\s*$$
+  ^\s*Bridge\s+Address\s+${bridge_address}\s*$$
+  ^\s*Root\s+Address\s+${root_address}\s*$$
+  ^\s*Port\s+${root_port}\s+Path\s+cost\s+${path_cost}\s*$$
+  ^\s*Regional\s+Root\s+Address\s+${regional_root_address}\s*$$
+  ^\s*internal\s+cost\s+${internal_cost}\s+Rem\s+hops\s+${rem_hops}\s*$$
+  ^\s*Operational\s+Hello\s+Time\s+${oper_hello_time},\s+Forward\s+Delay\s+${oper_fwd_delay},\s+Max\s+Age\s+${oper_max_age},\s+Txholdcount\s+${txholdcount}\s*$$
+  ^\s*Configured\s+Hello\s+Time\s+${config_hello_time},\s+Forward\s+Delay\s+${config_fwd_delay},\s+Max\s+Age\s+${config_max_age},\s+Max\s+Hops\s+${max_hops}\s*$$
+  ^\s*${interface}\s+${port_role}\s+${port_state}\s+${port_cost}\s+${port_prio_nbr}\s+${port_type}\s*$$ -> Record
+
+EOF

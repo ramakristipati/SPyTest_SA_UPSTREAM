@@ -1,0 +1,57 @@
+Value Required intf_name (Vlan\d+|Ethernet.*|PortChannel\d+|Po.*|Eth.*) 
+Value reachable_time (\d+)
+Value retrans_interval (\d+)
+Value ra_hop_limit (\d+)
+Value ra_pkt_sent (\d+)
+Value ra_pkt_rcvd (\d+)
+Value ra_interval_sec (\d+)
+Value ra_interval_msec (\d+)
+Value ra_lifetime (\d+|tracks ra-interval)
+Value def_router_pref (\S+)
+Value ra_other_conf (stateless|stateful)
+Value ra_manage_conf (DHCP)
+Value ra_adv_interval (Adv. Interval option)
+Value home_agent_conf (Home Agent flag bit set)
+Value home_agent_life (\d+|tracks ra-lifetime)
+Value home_agent_pref (\d+)
+Value ra_mtu (\d+)
+Value List rdnss ([\:\w\.\/\%]+)
+Value List rdnss_lifetime (infinite|\d+)
+Value List dnssl (\w+)
+Value List dnssl_lifetime (infinite|\d+)
+Value List prefix ([\:\w\.\/\%]+)
+Value List prefix_valid_lifetime (infinite|\d+)
+Value List prefix_prefd_lifetime (infinite|\d+)
+Value List prefix_no_auto_cfg (no-autoconfig)
+Value List prefix_off_link (off-link)
+Value List prefix_router_add (router-address)
+
+Start
+  ^\s*${intf_name}$$ -> Global_ra_data
+
+Global_ra_data
+  ^\s*ND advertised reachable time is\s*${reachable_time}\s*milliseconds$$
+  ^\s*ND advertised retransmit interval is\s*${retrans_interval}\s*milliseconds$$
+  ^\s*ND advertised hop-count limit is\s*${ra_hop_limit} hops$$
+  ^\s*ND router advertisements sent:\s*${ra_pkt_sent}\s*rcvd:\s*${ra_pkt_rcvd}$$
+  ^\s*ND router advertisements are sent every\s*${ra_interval_sec}\s*seconds$$
+  ^\s*ND router advertisements are sent every\s*${ra_interval_msec}\s*milliseconds$$
+  ^\s*ND router advertisements lifetime ${ra_lifetime}$$
+  ^\s*ND router advertisements live for ${ra_lifetime}\s*seconds$$
+  ^\s*ND router advertisement default router preference is\s*${def_router_pref}$$
+  ^\s*Hosts use ${ra_other_conf} autoconfig for addresses.$$
+  ^\s*Hosts use ${ra_manage_conf} to obtain routable addresses.$$
+  ^\s*ND router advertisements with ${ra_adv_interval}.$$
+  ^\s*Advertised Link MTU is\s*${ra_mtu}$$
+  ^\s*ND router advertisements with ${home_agent_conf}.$$
+  ^\s*Home Agent lifetime is ${home_agent_life} seconds$$
+  ^\s*Home Agent lifetime ${home_agent_life}$$
+  ^\s*Home Agent preference is ${home_agent_pref}$$
+  ^\s*rdnss ${rdnss}\s*(${rdnss_lifetime})?$$
+  ^\s*dnssl ${dnssl}\s*(${dnssl_lifetime})?$$
+  ^\s*prefix ${prefix}\s*(${prefix_valid_lifetime} ${prefix_prefd_lifetime})?\s*(${prefix_off_link})?\s*(${prefix_no_auto_cfg})?\s*(${prefix_router_add})?$$
+  ^\s*prefix ${prefix}\s*(${prefix_valid_lifetime} ${prefix_prefd_lifetime})?\s*(${prefix_no_auto_cfg})?\s*(${prefix_off_link})?\s*(${prefix_router_add})?$$
+  ^\s*(Vlan\d+|Ethernet.*|PortChannel\d+|Po.*|Eth.*)$$ -> Continue.Record
+  ^\s*${intf_name}$$
+  ^\s*$$ -> Record
+

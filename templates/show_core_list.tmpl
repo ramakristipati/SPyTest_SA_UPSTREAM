@@ -1,0 +1,20 @@
+########################################################
+#show core list
+#        TIME               PID SIG COREFILE EXE
+#2021-09-21 19:35:45      10512   6 present  aclsvcd
+########################################################
+Value Time (\S+\s+\S+)
+Value Pid (\d+)
+Value Sig (\d+)
+Value Coreshow (\S+)
+Value Exe (\S+)
+Value Timezone (\S+)
+Value Uid (\d+)
+Value Gid (\d+)
+Value Day (\S+)
+
+
+Start
+  ^${Time}\s+${Pid}\s+${Sig}\s+${Coreshow}\s+${Exe}\s*$$ -> Record
+  ^${Day}\s+${Time}\s+${Timezone}\s+${Pid}\s+${Uid}\s+${Gid}\s+${Sig}\s+${Coreshow}\s+${Exe}\s*$$ -> Record
+

@@ -1,0 +1,5 @@
+Value IFACE ([\w./]+)
+Value trap_status (enable|disable)
+
+Start
+  ^\s*${IFACE}\s*${trap_status}\s*$$ -> Record

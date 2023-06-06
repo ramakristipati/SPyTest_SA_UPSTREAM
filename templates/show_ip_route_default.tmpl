@@ -1,0 +1,6 @@
+Value ip_addr ([\d\.\:\/]+)
+
+Start
+  ^\s*default via\s+${ip_addr}\s.*$$ -> Record
+
+EOF

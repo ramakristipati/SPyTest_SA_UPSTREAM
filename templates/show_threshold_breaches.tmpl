@@ -1,0 +1,12 @@
+Value eventid (\d+)
+Value buffer (\S+)
+Value threshold_type (\S+)
+Value port (\S+)
+Value index (\d+)
+Value value (\d+)
+Value timestamp (\S+)
+
+Start
+  ^(-+\s*)*$$
+  ^\s*${eventid}\s+${buffer}\s+${threshold_type}\s+${port}\s+${index}\s+${value}\s+${timestamp} -> Record
+  ^$$

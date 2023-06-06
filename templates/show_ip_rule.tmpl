@@ -1,0 +1,7 @@
+Value force_mgmt_route ([\d\.\:\/]+)
+Value ip_table (\S+)
+
+Start
+  ^\s*\d+\:from all to\s+${force_mgmt_route}\s+lookup\s+${ip_table}\s*$$ -> Record
+
+EOF

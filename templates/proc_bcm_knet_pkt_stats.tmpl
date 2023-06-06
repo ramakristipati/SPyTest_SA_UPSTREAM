@@ -1,0 +1,14 @@
+Value protocol (\S+)
+Value knet_rx (\d+)
+Value knet_tx (\d+)
+Value knet_rx_err (\d+)
+Value knet_tx_err (\d+)
+Value Filldown rx_total (\d+)
+Value Filldown tx_total (\d+)
+
+Start
+  ^\s*Total\s+rx\s+\=\s+${rx_total}
+  ^\s*Total\s+tx\s+\=\s+${tx_total}
+  ^\s*${protocol}\s+${knet_rx}\s+${knet_rx_err}\s+${knet_tx}\s+${knet_tx_err}\s*$$ -> Record
+
+EOF

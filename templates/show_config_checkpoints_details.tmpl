@@ -1,0 +1,14 @@
+Value id (\S+)
+Value label (\S+)
+Value timestamp (\S+)
+Value user (\S+)
+Value origin (\S+)
+Value dump_file (\S+)
+
+Start
+  ^\s*ID\s*:\s*${id}\s*$$
+  ^\s*Label\s*:\s*${label}\s*$$
+  ^\s*Timestamp\s*:\s*${timestamp}\s*$$
+  ^\s*User\s*:\s*${user}\s*$$
+  ^\s*Origin\s*:\s*${origin}\s*$$
+  ^\s*Dump File\s*:\s*${dump_file}\s*$$ -> Record

@@ -1,0 +1,18 @@
+Value Filldown drops (\d+)
+Value srcip (\S+)
+Value dstip (\S+)
+Value src_port (\d+)
+Value dst_port (\d+)
+Value protocol (\d+)
+Value drop_reason (\S+)
+Value location (\S+)
+Value Drop_type (\S+)
+Value Intf_name (\S+)
+Value timestamp (\d+\s+\w+\s+\d+,\s+\d+:\d+:\d+\s+\w+)
+
+
+Start
+  ^\s*Number of Dropping Flows\s+:\s+${drops}\s*$$
+  ^\s*${srcip}\s+${dstip}\s+${src_port}\s+${dst_port}\s+${protocol}\s+${drop_reason}\s+${location}\s+${Drop_type}\s+(${Intf_name}){0,1}\s+${timestamp}\s*$$ -> Record
+
+EOF

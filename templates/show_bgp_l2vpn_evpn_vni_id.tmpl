@@ -1,0 +1,68 @@
+####################################################
+# CLICK:
+# ------
+#
+# admin@sonic:~$ show bgp l2vpn evpn vni 500
+# VNI: 500 (known to the kernel)
+#  Type: L3
+#  Tenant VRF: Vrf1
+#  RD: 120.1.1.1:5096
+#  Originator IP: 34.34.34.1
+#  Originator External IP: 34.34.34.1
+#  Advertise-gw-macip : n/a
+#  Advertise-svi-macip : n/a
+#  Advertise-pip: No
+#  System-IP: 3.3.3.2
+#  System-MAC: 68:21:5f:b7:29:10
+#  Router-MAC: 68:21:5f:b7:29:10
+#  Import Route Target:
+#    300:500
+#  Export Route Target:
+#    300:500
+#admin@sonic:~$
+#
+# KLISH
+# ------
+#
+# sonic# show bgp l2vpn evpn vni 500
+#  VNI: 500(known to the kernel)
+#   Type: L3
+#   RD: 120.1.1.1:5096
+#   Originator IP: 34.34.34.1
+#   Originator External IP: 34.34.34.1
+#   Mcast group:
+#   Advertise-gw-macip:
+#   Advertise-pip: No
+#   Import Route Target:
+#    300:500
+#   Export Route Target:
+#    300:500
+# sonic#
+####################################################
+Value VNI (\d+)
+Value TYPE (\S+)
+Value VRFNAME (\S+)
+Value RD (\d+\:\d+|\d+\.\d+\.\d+\.\d+)
+Value ORIGINIP (\d+\.\d+\.\d+\.\d+)
+Value EXTERNALIP (\d+\.\d+\.\d+\.\d+)
+Value SMAC (([0-9a-f]{2}[:]){5}[0-9a-f]{2})
+Value RMAC (([0-9a-f]{2}[:]){5}[0-9a-f]{2})
+Value GWMAC (\S+)
+Value ADV_PIP (\S+)
+Value List RT (\d+\:\d+)
+
+
+Start
+  ^\s*VNI:\s${VNI}
+  ^\s*Type:\s${TYPE}$$
+  ^\s*Tenant VRF:\s${VRFNAME}$$
+  ^\s*RD:\s${RD}
+  ^\s*Originator IP:\s${ORIGINIP}$$
+  ^\s*Originator External IP:\s${EXTERNALIP}$$
+  ^\s*System-MAC:\s${SMAC}$$
+  ^\s*Router-MAC:\s${RMAC}$$
+  ^\s*Advertise-gw-macip\s*:\s${GWMAC}$$
+  ^\s*Advertise-pip\s*:\s${ADV_PIP}$$
+  ^\s*${RT}$$
+
+

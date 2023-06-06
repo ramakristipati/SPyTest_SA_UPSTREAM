@@ -1,0 +1,10 @@
+Value State (\S+)
+Value StateDetail (.*)
+Value StartTime (.*)
+Value EndTime (.*)
+
+Start
+  ^\s*State\s+:\s*${State}\s*$$
+  ^\s*State\sdetail\s+:\s*${StateDetail}\s*$$
+  ^\s*Start\stime\s+:\s*${StartTime}\s*$$
+  ^\s*End\stime\s+:\s*${EndTime}\s*$$ -> Record

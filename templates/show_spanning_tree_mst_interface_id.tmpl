@@ -1,0 +1,20 @@
+Value Filldown link_type (\w+)
+Value Filldown bpdu_filter (\S+)
+Value Filldown boundary (\w+)
+Value Filldown bpdu_guard (\S+)
+Value Filldown instance (\d+)
+Value port_role (\S+)
+Value port_state (\S+)
+Value port_pathcost (\d+)
+Value port_priority (\d+)
+Value port_priority_nbr (\d+)
+Value vlan_map ([\d,-]+)
+Value Filldown port_edgeport (True|False)
+
+Start
+  ^\s*Link\s+Type:\s+${link_type}\s+Bpdu\s+filter:\s+${bpdu_filter}\s*$$
+  ^\s*Boundary:\s+${boundary}\s+Bpdu\s+guard:\s+${bpdu_guard}\s*$$
+  ^\s*Edge Port:\s+${port_edgeport}\s*$$
+  ^\s*${instance}\s+${port_role}\s+${port_state}\s+${port_pathcost}\s+${port_priority}\.${port_priority_nbr}\s+${vlan_map}\s*$$ -> Record
+
+EOF

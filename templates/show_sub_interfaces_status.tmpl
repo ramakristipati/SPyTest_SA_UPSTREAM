@@ -1,0 +1,21 @@
+#show subinterface status
+#Sub port interface    Speed    MTU    Vlan    Admin                 Type
+#------------------  -------  -----  ------  -------  -------------------
+#     Ethernet64.10     100G   9100      10       up  dot1q-encapsulation
+#     Ethernet74.10     100G   9100      22       up  dot1q-encapsulation
+################################################################################
+Value interface (\S+)
+Value speed (\S+)
+Value mtu (\d+)
+Value vlan (\d+)
+Value admin_state (\w+)
+Value type (\S+)
+
+Start
+  ^.*------ -> header
+
+header
+  ^\s*${interface}\s+${speed}\s+${mtu}\s+${vlan}\s+${admin_state}\s+${type}\s*$$ -> Record
+  ^\s*${interface}\s+${speed}\s+${mtu}\s+${admin_state}\s+${type}\s*$$ -> Record
+
+EOF

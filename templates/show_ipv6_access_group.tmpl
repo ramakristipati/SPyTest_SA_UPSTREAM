@@ -1,0 +1,12 @@
+Value direction (\w+)
+Value access_list (\S+)
+Value interface (\S+)
+Value module (\S+)
+Value acl_state (\S+)
+
+Start
+  ^\s*${direction}\s+IPV6\s+access-list\s+${access_list}\s+on\s+${interface}\s*$$ -> Record
+  ^\s*${direction}\s+IPV6\s+access-list\s+${access_list}\s+on\s+${interface}\s+\(${acl_state}\)\s*$$ -> Record
+  ^\s*${direction}\s+IPV6\s+access-list\s+${access_list}\s+on\s+${interface}\s+by\s+${module}\s*$$ -> Record
+
+EOF

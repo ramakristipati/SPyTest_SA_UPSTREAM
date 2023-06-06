@@ -1,0 +1,12 @@
+Value entry_type (\S)
+Value access_mode (\S+)
+Value number_of_links (\d+)
+Value owner (\S+)
+Value group (\S+)
+Value size (\d+)
+Value timestamp (\d+-\d+-\d+\s+\d+:\d+:\d+)
+Value entry_name (\S+)
+
+
+Start
+  ^\s*${entry_type}${access_mode}\s+${number_of_links}\s+${owner}\s+${group}\s+${size}\s+${timestamp}\s+${entry_name}\s*$$ -> Record

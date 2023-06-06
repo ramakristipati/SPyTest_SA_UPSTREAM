@@ -1,0 +1,34 @@
+Value Filldown instance (\d+)
+Value Filldown vlan_map ([\d,-]+)
+Value Filldown bridge_address ([\w.]+)
+Value Filldown root_address ([\w.]+)
+Value Filldown path_cost (\d+)
+Value Filldown rem_hops (\d+)
+Value Filldown root_port (\S+)
+Value interface ([\w./]+)
+Value port_state (\S+)
+Value port_role (\S+)
+Value port_id (\d+)
+Value desig_bridge_port_id (\d+)
+Value port_priority (\d+)
+Value port_cost (\d+)
+Value desig_port_cost (\d+)
+Value desig_root_addr ([\w.]+)
+Value desig_bridge_addr ([\w.]+)
+Value fwd_transition (\d+)
+Value bpdu_sent (\d+)
+Value bpdu_rec (\d+)
+
+Start
+  ^\s*#####\s+MST${instance}\s+Vlans\s+mapped:\s+${vlan_map}\s*$$
+  ^\s*Bridge\s+Address\s+${bridge_address}\s*$$
+  ^\s*Root\s+Address\s+${root_address}\s*$$
+  ^\s*Port\s+${root_port}\s+Path\s+cost\s+${path_cost}\s+Rem\s+hops\s+${rem_hops}\s*$$
+  ^\s*${interface}\s+is\s+${port_state}\s+${port_role}\s*$$
+  ^\s*Port\s+info\s+port\s+id\s+${port_id}\s+priority\s+${port_priority}\s+cost\s+${port_cost}\s*$$
+  ^\s*Designated\s+root\s+Address\s+${desig_root_addr}\s+cost\s+${desig_port_cost}\s*$$
+  ^\s*Designated\s+bridge\s+Address\s+${desig_bridge_addr}\s+port\s+id\s+${desig_bridge_port_id}\s*$$
+  ^\s*Timers:\s+forward\s+transitions\s+${fwd_transition}\s*$$
+  ^\s*Bpdus\s+sent\s+${bpdu_sent},\s+received\s+${bpdu_rec}\s*$$ -> Record
+
+EOF

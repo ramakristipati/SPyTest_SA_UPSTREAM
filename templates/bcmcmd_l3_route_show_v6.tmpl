@@ -1,0 +1,8 @@
+Value vrf (\d+)
+Value route (\S+:\S+:\S+:\S+:\S+:\S+:\S+:\S+)
+Value mask_len (\d+)
+Value intf (\d+)
+
+Start
+  ^\s*\d+\s+${vrf}\s+${route}\/${mask_len}\s+${intf}\s+\d+\s+\S+ -> Record
+

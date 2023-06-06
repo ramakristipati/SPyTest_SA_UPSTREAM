@@ -1,0 +1,20 @@
+# First line is the header fields for columns and is mandatory.
+# Regular expressions are supported in all fields except the first.
+# Last field supports variable length command completion.
+# abc[[xyz]] is expanded to abc(x(y(z)?)?)?, regexp inside [[]] is not supported
+#
+# Rules of Ordering:
+#  - OS in alphbetical order
+#  - Command in length other
+#  - When Length is the same, use alphabetical order
+#  - Keep space between OS's
+#
+Template, Hostname, Platform, Command
+
+fp_show_version.tmpl, .*, fastpath, show version
+fp_show_hosts.tmpl, .*, fastpath, show hosts
+fp_show_interface_status.tmpl, .*, fastpath, show interfaces status all
+fp_show_port_all.tmpl, .*, fastpath, show port all
+fp_taDebugPortInfo.tmpl, .*, fastpath, devsh 'taDebugPortInfo .*'
+fp_taDebugSysInfo.tmpl, .*, fastpath, devsh taDebugSysInfo
+

@@ -1,0 +1,16 @@
+Value direction (\w+)
+Value access_list (\S+)
+Value interface (\S+)
+Value module (\S+)
+Value acl_state (\S+)
+Value obj_grp (\S+)
+
+Start
+  ^\s*${direction}\s+(IP|IPV6)\s+access-list\s+${access_list}\s+on\s+${interface}\s*$$ -> Record
+  ^\s*${direction}\s+(IP|IPV6)\s+access-list\s+${access_list}\s+on\s+${interface}\s+\(${acl_state}\)\s*$$ -> Record
+  ^\s*${direction}\s+(IP|IPV6)\s+access-list\s+${access_list}\s+on\s+${interface}\s+by\s+${module}\s*$$ -> Record
+  ^\s*${direction}\s+(IP|IPV6)\s+redirect\s+access-list\s+${access_list}\s+on\s+${interface}\s+by\s+${module}\s*$$ -> Record
+  ^\s*${direction}\s+(IP|IPV6)\s+access-list\s+${access_list}\s+on\s+${interface}\s+by\s+${module}\s.*group\s+${obj_grp}\s*$$ -> Record
+  ^\s*${direction}\s+(IP|IPV6)\s+redirect\s+access-list\s+${access_list}\s+on\s+${interface}\s+by\s+${module}\s.*group\s+${obj_grp}\s*$$ -> Record
+
+EOF

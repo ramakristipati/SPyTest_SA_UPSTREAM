@@ -1,0 +1,21 @@
+Value BUFFER_PROFILE (egress_lossless_profile|egress_lossy_profile|ingress_lossy_profile|pg_lossless_10000_40m_profile|pg_lossless_100000_40m_profile|pg_lossless_400000_40m_profile)
+Value MODE (static|dynamic)
+Value POOL (\S+)
+Value SIZE (\d+)
+Value STATIC_THRESHOLD (\d+)
+Value DYNAMIC_THRESHOLD (-\d+|\d+)
+Value PAUSE_THRESHOLD (\d+)
+Value RESUME_THRESHOLD (\d+)
+Value RESUME_OFFSET_THRESHOLD (\d+)
+
+Start
+  ^\s*${BUFFER_PROFILE}\:$$ 
+  ^\s*mode\s+:\s+${MODE}\s*$$
+  ^\s*pool\s+:\s+${POOL}\s*$$
+  ^\s*size\s+:\s+${SIZE}\s*$$
+  ^\s*static-threshold\s+\:\s*${STATIC_THRESHOLD}$$ -> Record
+  ^\s*dynamic-threshold\s+:\s+${DYNAMIC_THRESHOLD}$$ 
+  ^\s*pause-threshold\s+:\s+${PAUSE_THRESHOLD}$$ 
+  ^\s*resume-threshold\s+:\s+${RESUME_THRESHOLD}$$
+  ^\s*resume-offset-threshold\s+:\s+${RESUME_OFFSET_THRESHOLD}$$ -> Record
+  ^\s*dynamic-threshold\s+:\s+${DYNAMIC_THRESHOLD}$$ -> Record

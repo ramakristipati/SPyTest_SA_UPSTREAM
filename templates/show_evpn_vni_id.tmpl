@@ -1,0 +1,52 @@
+####################################################
+# sonic# show bgp l2vpn evpn vni 500
+#  VNI: 500(known to the kernel)
+#   Type: L3
+#   RD: 120.1.1.1:5096
+#   Originator IP: 34.34.34.1
+#   Originator External IP: 34.34.34.1
+#   Mcast group:
+#   Advertise-gw-macip:
+#   Advertise-pip: No
+#   Import Route Target:
+#    300:500
+#   Export Route Target:
+#    300:500
+# sonic#
+####################################################
+Value VNI (\d+)
+Value TYPE (\S+)
+Value VRF_NAME (\S+)
+Value RD (\d+\:\d+|\d+\.\d+\.\d+\.\d+)
+Value ORIGIN_IP (\d+\.\d+\.\d+\.\d+)
+Value EXTERNAL_IP (\d+\.\d+\.\d+\.\d+)
+Value SYS_IP (\d+\.\d+\.\d+\.\d+)
+Value SYS_MAC (([0-9a-f]{2}[:]){5}[0-9a-f]{2})
+Value FLAGS_AMAC (\d+)
+Value FLAGS_PIPCONFIG (\d+)
+Value R_MAC (([0-9a-f]{2}[:]){5}[0-9a-f]{2})
+Value GW_MAC (\S+)
+Value ADV_PIP (\S+)
+Value ADV_SVI (\S+)
+Value L2_VNI (\d+)
+Value List RT (\d+\:\d+)
+
+
+Start
+  ^\s*VNI:\s${VNI}
+  ^\s*Type:\s${TYPE}$$
+  ^\s*Tenant VRF:\s${VRF_NAME}$$
+  ^\s*RD:\s${RD}
+  ^\s*Originator IP:\s${ORIGIN_IP}$$
+  ^\s*Originator External IP:\s${EXTERNAL_IP}$$
+  ^\s*System-IP:\s${SYS_IP}$$
+  ^\s*Flags:\sanycast-mac:\s${FLAGS_AMAC},\spip-configured:\s${FLAGS_PIPCONFIG}
+  ^\s*System-MAC:\s${SYS_MAC}$$
+  ^\s*Router-MAC:\s${R_MAC}$$
+  ^\s*Advertise-gw-macip\s*:\s${GW_MAC}$$
+  ^\s*Advertise-svi-macip\s*:\s${ADV_SVI}$$
+  ^\s*Advertise-pip\s*:\s${ADV_PIP}$$
+  ^\s*L2 VNIs:\s${L2_VNI}
+  ^\s*${RT}$$
+
+

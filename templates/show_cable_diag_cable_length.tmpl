@@ -1,0 +1,10 @@
+Value Interface (\S+)
+Value Type (TDR|XCVR)
+Value Length (< \S+m|>= \S+m|\d+.*m|N/A)
+
+
+Start
+  ^\s*${Interface}\s+${Type}\s+${Length}\s*$$ -> Record
+  ^\s*${Interface}\s+${Type}\s*$$ -> Record
+  ^\s*${Interface}\s+${Length}\s*$$ -> Record
+  ^\s*${Interface}\s*$$ -> Record

@@ -1,0 +1,22 @@
+show hosts
+
+Host name...................................... dhcp-10-52-133-209
+Default domain................................. Domain name is not configured
+Default domain list............................ dhcp.broadcom.net
+Domain Name Lookup............................. Enabled
+Number of retries.............................. 2
+Retry timeout period........................... 3
+Name servers (Preference order)................ 192.19.189.30, 192.19.189.10
+
+DNS source interface........................... (not configured)
+Configured host name-to-address mapping:
+
+ Host                                Addresses
+------------------------ ----------------------
+No host name is configured to IP address
+
+ Host                   Total   Elapsed    Type        Addresses
+---------------------- -------  -------    ----        --------------
+No hostname is mapped to an IP address
+
+

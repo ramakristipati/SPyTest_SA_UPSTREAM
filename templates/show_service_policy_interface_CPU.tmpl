@@ -1,0 +1,57 @@
+Value Filldown POLICY_MAP (\S+)
+Value Filldown POLICY_TYPE (\S+)
+Value Required CLASS_MAP (\S+)
+Value Fillup CLASS_STATUS (\S+)
+Value Fillup PRIORITY (\d+)
+Value Fillup CIR (\d+)
+Value Fillup CBS (\d+)
+Value Fillup PIR (\d+)
+Value Fillup PBS (\d+)
+Value Fillup POLICING_STATUS (\S+)
+Value Fillup RATE_LIMIT_TYPE (\w+)
+Value Fillup RATE_LIMIT_MODE (\S+)
+Value Fillup OPER_CIR (\d+)
+Value Fillup OPER_CBS (\d+)
+Value Fillup OPER_PIR (\d+)
+Value Fillup OPER_PBS (\d+)
+Value Fillup GREEN_PKTS (\d+)
+Value Fillup GREEN_BYTES (\d+)
+Value Fillup GREEN_ACTION (\S+)
+Value Fillup YELLOW_PKTS (\d+)
+Value Fillup YELLOW_BYTES (\d+)
+Value Fillup YELLOW_ACTION (\S+)
+Value Fillup RED_PKTS (\d+)
+Value Fillup RED_BYTES (\d+)
+Value Fillup RED_ACTION (\S+)
+Value Fillup TRAP_QUEUE (\d+)
+Value Fillup MATCH_FRAMES (\d+)
+Value Fillup MATCH_BYTES (\d+)
+
+Start
+  ^CPU\s*
+  ^\s*Policy\s${POLICY_MAP}\s*type\s*${POLICY_TYPE}\s*at\s*ingress
+  ^\s*Flow\s${CLASS_MAP}\sat\spriority\s${PRIORITY}\s\(${CLASS_STATUS}\) -> Continue.Record
+  ^\s*police:\scir\s${CIR}\scbs\s${CBS}\spir\s${PIR}\spbs\s${PBS}\s\(${POLICING_STATUS}\) -> Record
+  ^\s*set-trap-queue\s*${TRAP_QUEUE}\s* -> Record
+  ^\s*type\s*${RATE_LIMIT_TYPE}\s*mode\s*${RATE_LIMIT_MODE}\s* -> Record
+  ^\s*operational\scir\s${OPER_CIR}\scbs\s${OPER_CBS}\spir\s${OPER_PIR}\spbs\s${OPER_PBS}\s* -> Record
+  ^\s*green\s*${GREEN_PKTS}\s*packets\s*${GREEN_BYTES}\s*bytes\s*action\s*${GREEN_ACTION}\s* -> Record
+  ^\s*yellow\s*${YELLOW_PKTS}\s*packets\s*${YELLOW_BYTES}\s*bytes\s*action\s*${YELLOW_ACTION}\s* -> Record
+  ^\s*red\s*${RED_PKTS}\s*packets\s*${RED_BYTES}\s*bytes\s*action\s*${RED_ACTION}\s* -> Record
+  ^\s*Packet\smatches:\s*${MATCH_FRAMES}\sframes\s${MATCH_BYTES}\sbytes\s* -> Record
+
+
+#CPU
+#  Policy policy0 type acl-copp at ingress
+#  Description:
+#    Flow class1 at priority 101 (Active)
+#      Description:
+#      police: cir 101 cbs 0 pir 0 pbs 0 (Active)
+#        type bytes mode color-blind
+#        operational cir 0 cbs 0 pir 0 pbs 0
+#        green 0 packets 0 bytes action forward
+#        yellow 0 packets 0 bytes action forward
+#        red 0 packets 0 bytes action drop
+#      set-trap-queue 11
+#      Packet matches: 0 frames 0 bytes
+

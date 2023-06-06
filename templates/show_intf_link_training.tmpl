@@ -1,0 +1,11 @@
+Value port ((Ethernet|Eth)[0-9/]+)
+Value type (\w+.*)
+Value autoneg (on|off)
+Value link_training (on|off)
+Value oper_link_training (on|off)
+
+
+Start
+  ^\s*${port}\s+${type}\s+${autoneg}\s+${link_training}\s+${oper_link_training}\s*$$ -> Record
+  ^\s*${port}\s+${autoneg}\s+${link_training}\s+${oper_link_training}\s*$$ -> Record
+

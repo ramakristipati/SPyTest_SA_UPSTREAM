@@ -1,0 +1,41 @@
+#########################################################
+#sonic# show image status
+#-----------------------------------------------------------
+#Global operation status  : GLOBAL_STATE_SUCCESS
+#-----------------------------------------------------------
+#File operation status    : TRANSFER_STATE_SUCCESS
+#File size(bytes)         : 3282946030
+#File transfer bytes      : 3282946030
+#File progress            : 100%
+#Transfer start time      : 2022-08-24 18:02:57+0000
+#Transfer end time        : 2022-08-24 18:03:53+0000
+#-----------------------------------------------------------
+#Install operation status : INSTALL_STATE_SUCCESS
+#Install start time       : 2022-08-24 18:05:02+0000
+#Install end time         : 2022-08-24 18:08:56+0000
+#########################################################
+Value Filldown global_operation_status (\S+)
+Value Filldown file_operation_status (\S+)
+Value file_size (\d+)
+Value file_transfer_bytes (\d+)
+Value file_progress (\S+)
+Value transfer_start_time (\S+\s*\S+)
+Value transfer_end_time (\S+\s*\S+)
+Value Filldown install_operation_status (\S+)
+Value Filldown install_start_time (\S+\s*\S+)
+Value Filldown install_end_time (\S+\s*\S+)
+
+Start
+  ^\s*Global operation status\s*: ${global_operation_status}\s*$$ -> Record
+  ^\s*File operation status\s*: ${file_operation_status}\s*$$
+  ^\s*File size\(bytes\)\s*: ${file_size}\s*$$
+  ^\s*File transfer bytes\s*: ${file_transfer_bytes}\s*$$
+  ^\s*File progress\s*: ${file_progress}\s*$$
+  ^\s*Transfer start time\s*: ${transfer_start_time}\s*$$
+  ^\s*Transfer end time\s*: ${transfer_end_time}\s*$$ -> Record
+  ^\s*Install operation status\s*: ${install_operation_status}\s*$$
+  ^\s*Install start time\s*: ${install_start_time}\s*$$
+  ^\s*Install end time\s*: ${install_end_time}\s*$$ -> Record
+  ^$$
+
+EOF

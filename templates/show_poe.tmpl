@@ -1,0 +1,14 @@
+Value Firmware_Version ([\d+\.]+)
+Value Total_Power_Available (\d+)
+Value Threshold_Power (\d+\.\d+)
+Value Total_Power_Consumed (\d+\.\d+)
+Value Usage_Threshold (\d+)
+Value Power_Management_Mode (\w+)
+
+Start
+  ^\s*Firmware\s+Version\s+:\s+${Firmware_Version}\s*$$
+  ^\s*Total\s+Power\sAvailable\s+:\s+${Total_Power_Available}\s+Watts\s*$$
+  ^\s*Threshold\s+Power\s+:\s+${Threshold_Power}\s+Watts\s*$$
+  ^\s*Total\s+Power\s+Consumed\s+:\s+${Total_Power_Consumed}\s+Watts\s*$$
+  ^\s*Usage\s+Threshold\s+:\s+${Usage_Threshold}\s+%\s*$$
+  ^\s*Power\sManagement\sMode\s+:\s+${Power_Management_Mode}\s*$$ -> Record

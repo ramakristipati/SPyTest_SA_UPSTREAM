@@ -1,0 +1,16 @@
+#Interface  MAC-Address         Method   Host Mode    Control Mode  VLAN Assigned Reason
+#---------  -----------------   -------  ------------ ------------  --------------------------
+#1/16       10:8D:B6:C6:00:00   802.1X   multi-host   auto     RADIUS Assigned VLAN (10)
+#1/20       20:20:B5:09:11:11   MAB      single-host  force-auth    Critical Vlan(100)
+#####################################################################################
+Value interface ([\w./]+)
+Value mac_addr ([\w\:]+)
+Value method (\S+)
+Value host_mode (\S+)
+Value control_mode (\S+)
+Value vlan_assigned_reason (.*)
+Value user_name (\S+)
+
+Start
+  ^\s*${interface}\s+${user_name}\s+${mac_addr}\s+${method}\s+${host_mode}\s+${control_mode}\s+${vlan_assigned_reason} -> Record
+

@@ -1,0 +1,21 @@
+Value iface (\S+)
+Value pipe (N\/A|\d+)
+Value port (\S+)
+Value List supported_modes (\S+(,\s\S+)*)
+Value default_mode (\S+)
+
+Start
+  ^\d+\/ -> Continue.Record
+  ^\s*${port}\s+${pipe}\s+${iface}\s+${supported_modes},\s+${default_mode}\s*$$ -> Flex_dpb
+  ^\s*${port}\s+${pipe}\s+${iface}\s+${supported_modes}\s+${default_mode}\s*$$ -> Record
+  ^\s*${port}\s+${iface}\s+${supported_modes},\s+${default_mode}\s*$$ -> Dpb
+  ^\s*${port}\s+${iface}\s+${supported_modes}\s+${default_mode}\s*$$ -> Record
+
+Flex_dpb
+  ^\s*${supported_modes},\s*$$ -> Flex_dpb
+  ^\s*${supported_modes}\s*$$ -> Start
+
+Dpb
+  ^\s*${supported_modes},\s*$$ -> Dpb
+  ^\s*${supported_modes}\s*$$ -> Start
+

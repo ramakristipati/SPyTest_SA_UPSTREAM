@@ -1,0 +1,73 @@
+Value VRF ([\w_]+)
+Value INTERFACE (\w+\s*[\d/.]+)
+Value HELLO_INTVL (\d+)
+Value DR_PRIORITY (\d+)
+Value BFD_ENABLE (bfd)
+Value PIM_MODE ([\w\-]+)
+Value access_mode (access)
+Value access_vlan (\d+)
+Value trunk_mode (trunk)
+Value trunk_vlan_list ([\d\-\,]+)
+Value rif_interval (\d+)
+Value counter (\S+)
+Value type (PORT_INGRESS_DROPS)
+Value alias (\S+)
+Value group (\w+)
+Value desc ([\S\s]+)
+Value reason (\S+)
+Value mirror (\S+)
+
+Start
+  # If a line starts with 'interface' go to IfconfigScan section
+  ^interface ${INTERFACE} -> IfconfigScan
+  ^\s*counters\s+rif\s+interval\s+${rif_interval} -> Record
+  ^\s*dropcounters ${counter} -> DrpConfig
+
+IfconfigScan
+  # Interface section rows starts with a space in front. Avoid recording unless
+  # configuration is found for an entry type that needs to be stored. In that
+  # case, transition to "IfconfigStore" state.
+  ^\s+ip pim hello ${HELLO_INTVL} -> IfconfigStore
+  ^\s+ip pim drpriority ${DR_PRIORITY} -> IfconfigStore
+  ^\s+ip pim ${BFD_ENABLE} -> IfconfigStore
+  ^\s+ip pim ${PIM_MODE} -> IfconfigStore
+  # Switchport config
+  ^\s+switchport ${access_mode} Vlan ${access_vlan} -> SwConfigStore 
+  ^\s+switchport ${trunk_mode} allowed Vlan ${trunk_vlan_list} -> SwConfigStore
+  ^\s+switchport ${trunk_mode} allowed Vlan add ${trunk_vlan_list} -> SwConfigStore
+#  ^\s+switchport ${access_mode} Vlan ${access_vlan} -> SwConfigStore
+#  ^\s+switchport ${trunk_mode} allowed Vlan {trunk_vlan_list} -> SwConfigStore
+  # A line beginning with '!' marks the end of configuration for this interface:
+  # There is no PIM configuratio for this interface, so
+  # go back to 'Start' state without recording.
+  ^! -> Start
+
+IfconfigStore
+  ^\s+ip pim hello ${HELLO_INTVL}
+  ^\s+ip pim drpriority ${DR_PRIORITY}
+  ^\s+ip pim ${BFD_ENABLE}
+  ^\s+ip pim ${PIM_MODE}
+  # A line beginning with '!' marks the end of configuration for this interface:
+  # Record any captured PIM configuration for the interface and go back to 'Start'
+  # state.
+  # NOTE: When displaying individual interface configuration, no trailing
+  # '!' is present in the output. For this reason, the default EOF handling is
+  # required, and an output dictionary for the interface is stored regardless of
+  # whether or not any configuration exists for the interface.
+  ^! -> Record Start
+
+SwConfigStore
+  ^\s+switchport ${access_mode} Vlan ${access_vlan}
+  ^\s+switchport ${trunk_mode} allowed Vlan ${trunk_vlan_list}
+  ^\s+switchport ${trunk_mode} allowed Vlan add ${trunk_vlan_list}
+  ^! -> Record Start
+
+DrpConfig
+  ^\s*dropcounters ${counter}
+  ^\s*enable
+  ^\s*type ${type}
+  ^\s*alias ${alias}
+  ^\s*group ${group}
+  ^\s*description ${desc}
+  ^\s*mirror ${mirror}
+  ^\s*add-reason ${reason} -> Record

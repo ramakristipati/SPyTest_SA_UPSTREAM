@@ -1,0 +1,8 @@
+Value index (\d+)
+Value interface (\d+(/\d+)+)
+Value type (PHYSICAL|CPU|LAG)
+Value state (Down|Up)
+Value media (Gigabit - Level|Unknown|Copper)
+
+Start
+  ^\s*${index}\s*${interface}\s*${type}\s*${state}\s*${media}\s*$$ -> Record

@@ -1,0 +1,17 @@
+####################################################################
+#show config session
+#Name                State     Age        User
+#------------------- --------- ---------- ----------
+# --                 Active    00:00:05   admin
+####################################################################
+Value Name (\S+)
+Value State (\S+(\s+\S+)?)
+Value Age (\S+)
+Value User (\S+)
+
+Start
+  ^\s*Name\s*State\s+Age\s*User\s*$$
+  ^(-+\s*)*$$
+  ^\s+${Name}\s+${State}\s+${Age}\s+${User} -> Record
+
+

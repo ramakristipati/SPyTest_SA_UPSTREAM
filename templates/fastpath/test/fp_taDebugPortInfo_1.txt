@@ -1,0 +1,30 @@
+(dhcp-10-52-133-209)#devsh "taDebugPortInfo All,PHYSICAL"
+Devshell output (Session #0): taDebugPortInfo All,PHYSICAL
+
+Intf S/P  Type     Status Media Type
+---- ---- -------- ------ ---------------
+1    0/1  PHYSICAL Up     Gigabit - Level
+2    0/2  PHYSICAL Up     Gigabit - Level
+3    0/3  PHYSICAL Up     Gigabit - Level
+4    0/4  PHYSICAL Up     Gigabit - Level
+5    0/5  PHYSICAL Down   Unknown
+6    0/6  PHYSICAL Down   Unknown
+7    0/7  PHYSICAL Down   Unknown
+8    0/8  PHYSICAL Down   Unknown
+9    0/9  PHYSICAL Down   Unknown
+10   0/10 PHYSICAL Down   Unknown
+11   0/11 PHYSICAL Down   Unknown
+12   0/12 PHYSICAL Down   Unknown
+13   0/13 PHYSICAL Down   Unknown
+14   0/14 PHYSICAL Down   Unknown
+
+User Input ................................................ taDebugPortInfo All,PHYSICAL
+Argument (String) ......................................... All
+Argument (String) ......................................... PHYSICAL
+Executed .................................................. taDebugPortInfo
+Return Value .............................................. 0
+Return Value (hex) ........................................ 0x0
+
+
+(dhcp-10-52-133-209)#
+

@@ -1,0 +1,38 @@
+##################################################################################
+#Source          Group           Proto  Input            Output           TTL  Uptime
+#90.0.0.2        232.1.1.1       PIM    Ethernet46       Ethernet12       1    00:00:13
+#                                PIM                     Vlan101          1    00:00:13
+#90.0.0.2        232.1.1.2       PIM    Ethernet46       Ethernet12       1    00:00:11
+#                                PIM                     Vlan101          1    00:00:11
+###################################################################################
+Value Filldown vrf (\w+)
+Value installed ([\*]*)
+Value Filldown source ([\d\.]+|\*)
+Value Filldown group ([\w\.]+)
+Value proto (\w+)
+Value Filldown iif (none|\S+)
+Value oif (none|\S+)
+Value ttl (\d+)
+Value uptime ([\d\:\-wdhms]+)
+
+Start
+  ^\s*IP multicast routing table for VRF:\s*${vrf} -> Klish_mroute
+  ^\s*.*VRF:\s*${vrf}\s*$$
+  ^\s*Source\s+Group\s+Proto\s+Input\s+Output\s+TTL\s+Uptime\s*$$ -> Click
+  ^\s*Source\s+Group\s+Input\s+Output\s+Uptime\s*$$ -> Klish_mroute
+
+Click
+  ^\s*.*VRF:\s*${vrf}\s*$$
+  ^\s*.*indicates installed route
+  ^\s+${source}\s+${group}\s+\<*${proto}\>*\s*\<*\s*${iif}\s*\>*\s*\<*\s*${oif}\s*\>*\s*${ttl}\s+${uptime}\s*$$ -> Record
+  ^\s*${installed}\s+${source}\s+${group}\s+\<*${proto}\>*\s+\<*\s*${iif}\s*\>*\s+\<*\s*${oif}\s*\>*\s+${ttl}\s+${uptime}\s*$$ -> Record
+  ^\s*${installed}\s+${proto}\s+\<*\s*${oif}\s*\>*\s+${ttl}\s+${uptime}\s*$$ -> Record
+
+Klish_mroute
+  ^\s*IP multicast routing table for VRF:\s*${vrf}\s*$$
+  ^\s+${source}\s+${group}\s+\<*\s*${iif}\s*\>*\s+\<*\s*${oif}\s*\>*\s+${uptime}\s*$$ -> Record
+  ^\s*${installed}\s+${source}\s+${group}\s+\<*\s*${iif}\s*\>*\s+\<*\s*${oif}\s*\>*\s+${uptime}\s*$$ -> Record
+  ^\s*\<*\s*${oif}\s*\>*\s+${uptime}\s*$$ -> Record
+
+EOF
+

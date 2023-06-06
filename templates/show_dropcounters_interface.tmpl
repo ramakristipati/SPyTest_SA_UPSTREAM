@@ -1,0 +1,17 @@
+Value IFACE ([\w./]+)
+Value STATE (\w+)
+Value RX_ERR (\d+)
+Value TX_ERR (\d+)
+Value RX_DROP (\d+)
+Value TX_DROP (\d+)
+Value COUNTER (\d+)
+Value COUNTER_1 (\d+)
+Value COUNTER_2 (\d+)
+Value COUNTER_3 (\d+)
+
+Start
+  ^\s*${IFACE}\s+${STATE}\s+${RX_ERR}\s+${RX_DROP}\s+${TX_ERR}\s+${TX_DROP}\s*$$ -> Record
+  ^\s*${IFACE}\s+${STATE}\s+${RX_ERR}\s+${RX_DROP}\s+${TX_ERR}\s+${TX_DROP}\s+${COUNTER}\s*$$ -> Record
+  ^\s*${IFACE}\s+${STATE}\s+${RX_ERR}\s+${RX_DROP}\s+${TX_ERR}\s+${TX_DROP}\s+${COUNTER}\s+${COUNTER_1}\s*$$ -> Record
+  ^\s*${IFACE}\s+${STATE}\s+${RX_ERR}\s+${RX_DROP}\s+${TX_ERR}\s+${TX_DROP}\s+${COUNTER}\s+${COUNTER_1}\s+${COUNTER_2}\s*$$ -> Record
+  ^\s*${IFACE}\s+${STATE}\s+${RX_ERR}\s+${RX_DROP}\s+${TX_ERR}\s+${TX_DROP}\s+${COUNTER}\s+${COUNTER_1}\s+${COUNTER_2}\s+${COUNTER_3}\s*$$ -> Record

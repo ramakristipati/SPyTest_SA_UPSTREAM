@@ -1,0 +1,20 @@
+#######################################################################
+# show interface vlan-mappings
+# -------------------------------------------------------------------
+# Name           Outer           Inner        Mapped Vlan   Priority
+# -------------------------------------------------------------------
+# Eth1/1         100             -             1000          -
+# Eth1/1         200             20            2000          3
+# Eth1/7         100             -             1000          -
+#######################################################################
+Value Required interface ([\w]+\s*[\d./]+)
+Value outer_c_vlan (\d+)
+Value inner_c_vlan (\d+|-)
+Value Required s_vlan (\d+)
+Value vlan_priority (\d+|-)
+
+Start
+  ^\s*${interface}\s+${outer_c_vlan}\s+${inner_c_vlan}\s+${s_vlan}\s+${vlan_priority}\s*$$ -> Record
+  ^$$
+
+EOF

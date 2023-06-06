@@ -1,0 +1,14 @@
+Value interface (\S+)
+Value description (\S+)
+Value state (Down|Up)
+Value mode (10G Full|Auto)
+Value status (10G Full)
+Value type (\w+)
+Value control (\w+)
+Value vlan (\d+)
+
+Start
+  ^\s*${interface}\s*${state}\s*${vlan}\s*$$ -> Record
+  ^\s*${interface}\s*${state}\s*${mode}\s*${control}\s*${vlan}\s*$$ -> Record
+  ^\s*${interface}\s*${state}\s*${mode}\s*${status}\s*${type}\s*${control}\s*${vlan}\s*$$ -> Record
+  ^\s*${interface}\s*${description}\s*${state}\s*${mode}\s*${status}\s*${type}\s*${control}\s*${vlan}\s*$$ -> Record

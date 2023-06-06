@@ -1,0 +1,17 @@
+Value Local_time (.*)
+Value Universal_time (.*)
+Value RTC_time (.*)
+Value Time_zone (.*)
+Value System_clock_sync (\S+)
+Value Ntp_service (\S+)
+Value RTC_in_local_TZ (\S+)
+
+Start
+  ^\s*Local time:\s+${Local_time}\s*$$
+  ^\s*Universal time:\s+${Universal_time}\s*$$
+  ^\s*RTC time:\s+${RTC_time}\s*$$
+  ^\s*Time zone:\s+${Time_zone}\s*$$
+  ^System clock synchronized:\s+${System_clock_sync}\s*$$
+  ^\s*NTP service:\s+${Ntp_service}\s*$$
+  ^\s*RTC in local TZ:\s+${RTC_in_local_TZ}\s*$$
+  ^$$ -> Record

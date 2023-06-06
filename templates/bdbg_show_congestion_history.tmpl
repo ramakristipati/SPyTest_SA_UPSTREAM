@@ -1,0 +1,19 @@
+Value Filldown Interface (\S+)
+Value Filldown buffer (\S+)
+Value Filldown buffer_id (\d+)
+Value Filldown Event_Count (\d+)
+Value Id (\d+)
+Value Timestamp (\d+\s+\w+\s+\d+,\s+\d+:\d+:\d+\s+\w+)
+Value SH (\d+)
+Value HR (\d+)
+Value UC (\d+)
+Value MC (\d+)
+Value Drops (\d+|-\d+)
+
+
+Start
+  ^\s*Observation Point\s+:\s+${Interface}\s+${buffer}\s+${buffer_id}\s*$$
+  ^\s*Observation Point\s+:\s+${buffer}\s*$$
+  ^\s*Number of Congestion Events\s+:\s+${Event_Count}\s*$$
+  ^\s*${Id}\s+${Timestamp}\s+${SH}\s+${HR}\s+${UC}\s+${MC}\s+${Drops}\s*$$ -> Record
+

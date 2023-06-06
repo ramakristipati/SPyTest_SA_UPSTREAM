@@ -1,0 +1,23 @@
+Value Port (Eth\S+)
+Value Class_Requested (\S+)
+Value Class_Assigned (\S+)
+Value Output_Power (\d+)
+Value Output_Current (\d+)
+Value Output_Voltage (\d+\.\d+|\d+)
+Value Temp (\d+\.\d+|\d+)
+Value Status (\S+)
+Value Fault_Status (\S+\s\S+|\S+)
+Value Overload_Counter (\d+)
+Value Short_Counter (\d+)
+Value Power_Denied_Counter (\d+)
+Value Absent_Counter (\d+)
+Value Invalid_Signature_Counter (\d+)
+
+
+Start
+  ^\s*${Port}\s+${Class_Requested}\s+${Class_Assigned}\s+${Output_Power}\s+${Output_Current}\s+${Output_Voltage}\s+${Temp}\s+${Status}\s+${Fault_Status}
+  ^\s*Overload\sCounter\s+:\s+${Overload_Counter}\s*$$
+  ^\s*Short\sCounter\s+:\s+${Short_Counter}\s*$$
+  ^\s*Power\sDenied\sCounter\s+:\s+${Power_Denied_Counter}\s*$$
+  ^\s*Absent\sCounter\s+:\s+${Absent_Counter}\s*$$
+  ^\s*Invalid\sSignature\sCounter\s+:\s+${Invalid_Signature_Counter}\s*$$ -> Record

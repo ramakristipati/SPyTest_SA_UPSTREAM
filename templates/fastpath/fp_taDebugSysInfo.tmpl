@@ -1,0 +1,11 @@
+Value hostname (.+)
+Value description (.+)
+Value uptime (.+)
+Value version (.+)
+
+Start
+  ^\s*System\s*Name\s*\.+\s*${hostname}$$
+  ^\s*System\s*Description\s*\.+\s*${description}$$
+  ^\s*System\s*Up Time\s*\.+\s*${uptime}$$
+  ^\s*Software\s*Version\s*\.+\s*${version}$$
+

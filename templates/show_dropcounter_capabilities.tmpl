@@ -1,0 +1,26 @@
+Value PORT_INGRESS_DROPS (\d+)
+Value SWITCH_EGRESS_DROPS (\d+)
+Value PORT_MIRROR_SUPPORTED_INGRESS_DROPS (\d+)
+Value List PORT_INGRESS_DROPS_REASON_LIST (\w+)
+Value List SWITCH_EGRESS_DROPS_REASON_LIST (\w+)
+Value List PORT_MIRROR_SUPPORTED_INGRESS_DROPS_REASON_LIST (\w+)
+
+Start
+  ^\s*PORT_INGRESS_DROPS\s+${PORT_INGRESS_DROPS}\s*$$
+  ^\s*SWITCH_EGRESS_DROPS\s+${SWITCH_EGRESS_DROPS}\s*$$
+  ^\s*PORT_MIRROR_SUPPORTED_INGRESS_DROPS\s+${PORT_MIRROR_SUPPORTED_INGRESS_DROPS}\s*$$
+  ^\s*PORT_INGRESS_DROPS\: -> Port_Ingress_Drops
+
+Port_Ingress_Drops
+  ^\s*${PORT_INGRESS_DROPS_REASON_LIST}\s*$$ -> Continue
+  ^\s*$$
+  ^\s*SWITCH_EGRESS_DROPS\: -> Switch_Egress_Drops
+
+Switch_Egress_Drops
+  ^\s*${SWITCH_EGRESS_DROPS_REASON_LIST}\s*$$ -> Continue
+  ^\s*$$
+  ^\s*PORT_MIRROR_SUPPORTED_INGRESS_DROPS\: -> Port_Mirror_Supported_Ingress_Drops_Reason
+
+Port_Mirror_Supported_Ingress_Drops_Reason
+  ^\s*${PORT_MIRROR_SUPPORTED_INGRESS_DROPS_REASON_LIST}\s*$$
+  ^\s* -> Record

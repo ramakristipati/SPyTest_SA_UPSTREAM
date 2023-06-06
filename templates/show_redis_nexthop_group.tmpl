@@ -1,0 +1,8 @@
+Value nhp (\d+.\d+.\d+.\d+|\d+::\d+|\d+.\d+.\d+.\d+,\d+.\d+.\d+.\d+)
+Value ifname ((Ethernet|Eth)[0-9/]+|(Ethernet|Eth)[0-9/]+,(Ethernet|Eth)[0-9/]+)
+
+Start
+  ^\s*1\)\s+"nexthop"\s*$$
+  ^\s*2\)\s+"${nhp}"\s*$$
+  ^\s*3\)\s+"ifname"\s*$$
+  ^\s*4\)\s+"${ifname}"\s*$$ -> Record

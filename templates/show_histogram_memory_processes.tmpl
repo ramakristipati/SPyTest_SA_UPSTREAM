@@ -1,0 +1,21 @@
+Value start_date (\S+)
+Value start_time (\S+)
+Value end_date (\S+)
+Value end_time (\S+)
+Value current_date (\S+)
+Value current_time (\S+)
+Value name (\S+)
+Value id (\S*)
+Value current_or_diff (\-?[\d+\.?\d*]+[KBMGT]*)
+Value high_low (([\d+\.?\d*]+[KBMGT]+\/[\d+\.?\d*]+[KBMGT]+)*)
+Value low ([\d+\.?\d*]*[KBMGT]*)
+Value columns ((\-?[\d+\.?\d*]*[-KBMGT]*\s+)*)
+Value error ((\S+\s*)*)
+
+Start
+  ^Start Time\s+\:\s+${start_date}\s+${start_time} 
+  ^End Time\s+\:\s+${end_date}\s+${end_time} 
+  ^Current Time\s+\:\s+${current_date}\s+${current_time} 
+  ^\s+${columns}\s+${current_or_diff}\s+${high_low}\s*${name}\s* -> Record
+  ^\s*===Datetime format error,\s+${error} -> Record
+  ^\s*===Invalid isoformat string:\s+${error} -> Record

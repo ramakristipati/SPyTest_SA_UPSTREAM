@@ -1,0 +1,14 @@
+Value server (\S+)
+Value minpoll (\d+)
+Value maxpoll (\d+)
+Value prefer (True|False)
+Value authkeyid (\d+)
+
+Start
+  ^\s*\-+\s*$$
+  ^\s*NTP Servers\s+minpoll\s+maxpoll\s+Prefer\s+Authentication key ID\s*$$
+  ^\s*\-+\s*$$
+  ^\s*${server}\s+${minpoll}\s+${maxpoll}\s+${prefer}\s+${authkeyid}\s*$$ -> Record
+  ^\s*${server}\s+${minpoll}\s+${maxpoll}\s+${prefer}\s*$$ -> Record
+
+EOF

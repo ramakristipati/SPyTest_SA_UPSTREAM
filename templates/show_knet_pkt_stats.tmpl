@@ -1,0 +1,16 @@
+Value Filldown type (\S+)
+Value pkt_type (\S+)
+Value rx_pkts (\d+)
+Value rx_errors (\d+)
+Value tx_pkts (\d+)
+Value tx_errors (\d+)
+Value error_type ([\s\S]+?)
+
+
+Start
+  ^\s*${type}\s*Pkt Type Stats\s*$$
+  ^\s*Pkt Type\s+Rx Pkts\s+Rx errors\s+Tx Pkts\s+Tx errors\s*$$
+  ^\s*${pkt_type}\s+${rx_pkts}\s+${rx_errors}\s+${tx_pkts}\s+${tx_errors}\s*$$ -> Record
+  ^\s*${error_type}\s+${rx_errors}\s+${tx_errors}\s*$$ -> Record
+
+EOF

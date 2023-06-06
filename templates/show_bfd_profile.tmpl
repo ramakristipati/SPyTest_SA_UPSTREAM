@@ -1,0 +1,22 @@
+Value profile_name (\S+)
+Value profile_status (\S+)
+Value passive_mode (\S+)
+Value echo_mode (\S+)
+Value multiplier (\d+)
+Value minimum_ttl (\d+)
+Value rx_interval (\d+)
+Value tx_interval (\d+)
+Value echo_tx_interval (\d+)
+
+Start
+  ^\s*Profile-name:\s*(.*) -> Continue.Record
+  ^\s*Profile-name:\s*${profile_name}$$
+  ^\s*Enabled:\s*${profile_status}
+  ^\s*Echo-mode:\s*${echo_mode}
+  ^\s*Passive-mode:\s*${passive_mode}
+  ^\s*Minimum-Ttl:\s*${minimum_ttl}
+  ^\s*Detect-multiplier:\s*${multiplier}
+  ^\s*Receive\s*interval:\s*${rx_interval}ms
+  ^\s*Transmission\s*interval:\s*${tx_interval}ms
+  ^\s*Echo\s*transmission\s*interval:\s*${echo_tx_interval}ms
+

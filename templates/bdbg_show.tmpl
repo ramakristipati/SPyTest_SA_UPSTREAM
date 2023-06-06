@@ -1,0 +1,11 @@
+Value congestion (\w+)
+Value drops (\w+)
+Value collection (\d+)
+Value retention (\d+)
+
+Start
+ ^\s*Supported tools\s+:\s+congestion\[${congestion}\],\s+drops\[${drops}\]\s*$$
+ ^\s*collection-interval:\s+${collection} sec\s*$$
+ ^\s*max-retention-interval:\s+${retention} sec\s*$$ -> Record
+
+EOF

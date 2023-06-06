@@ -1,0 +1,21 @@
+Value Required VRF (\S+)
+Value ROUTER_ID ([\d+\.]+)
+Value HELPER (\w+)
+Value PLANNED_ONLY (\w+)
+Value STRICT_LSA (\w+)
+Value HELPER_GRACE_TIME (\d+)
+Value HELPER_EXIT_REASON (.*)
+Value ACTIVE_RESTART_NBRS (\d+)
+Value HELPER_NBRS ([\d\.\,\'\s]+)
+
+Start
+  ^\s*VRF Name: ${VRF}
+  ^\s*OSPF Router with ID\s\(${ROUTER_ID}\)
+  ^\s*Graceful restart helper support ${HELPER}\.
+  ^\s*Helper supported for ${PLANNED_ONLY} restarts only.
+  ^\s*Helper supported for ${PLANNED_ONLY} and Unplanned Restarts.
+  ^\s*Strict LSA check is ${STRICT_LSA}\.
+  ^\s*Supported Graceful restart interval: ${HELPER_GRACE_TIME}\(in seconds\)\.
+  ^\s*Last Helper exit Reason:\s${HELPER_EXIT_REASON}
+  ^\s*Number of Active neighbours in graceful restart: ${ACTIVE_RESTART_NBRS}
+  ^\s*\[${HELPER_NBRS}\]

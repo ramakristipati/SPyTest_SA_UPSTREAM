@@ -1,0 +1,12 @@
+Value snooping_state (\w+)
+Value mac_verification_state (\w+)
+Value vlan_enabled (.*)
+Value interface_list (.*)
+#Value List trusted_port_state (\w+)
+
+Start
+  ^\s*DHCP(v6)? snooping is\s+${snooping_state}\s*$$
+  ^\s*DHCP(v6)? snooping source MAC verification is\s+${mac_verification_state}\s*$$
+  ^\s*DHCP(v6)? snooping is enabled on the following VLANs:\s+${vlan_enabled}\s*$$ 
+  ^\s*DHCP(v6)? snooping trusted interfaces:\s+${interface_list}\s*$$
+

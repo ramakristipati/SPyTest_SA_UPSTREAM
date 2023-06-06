@@ -1,0 +1,20 @@
+Value Key Id (\d+)
+Value Severity (\w+)
+Value Name (\w+)
+Value Timestamp ([A-Za-z-:.0-9]+)
+Value Description ([A-Za-z/:.\s0-9.]+)
+Value Source ([A-Za-z/:.\s0-9.]+)
+Value Acknowledged ([A-Za-z]+)
+Value ATimestamp ([A-Za-z-:.0-9]+)
+
+Start
+ ^\s*Id:\s+${Id}\s*$$
+ ^\s*Severity:\s+${Severity}\s*$$
+ ^\s*Type:\s+${Name}\s*$$
+ ^\s*Timestamp:\s+${Timestamp}\s*$$
+ ^\s*Description:\s+${Description}\s*$$
+ ^\s*Source:\s+${Source}\s*$$ 
+ ^\s*Acknowledged:\s+${Acknowledged}\s*$$ 
+ ^\s*Acknowledged time:\s+${ATimestamp}\s*$$ -> Record
+
+EOF

@@ -1,0 +1,32 @@
+#MAB Request Fmt Attr1 Groupsize... 2
+#MAB Request Fmt Attr1 Separator... legacy(:)
+#MAB Request Fmt Attr1 Case........ uppercase
+#
+#Interface  ..................................... Eth1/49
+#Admin mode ..................................... Enabled
+#mab_auth_type .................................. EAP_MD5
+#Server Timeout(secs) ........................... 30
+#############################################
+Value Filldown groupsize (\d+)
+Value Filldown separator (\S+)
+Value Filldown case (\S+)
+Value interface ([\w./]+)
+Value admin_mode (\S+)
+Value auth_type (\S+)
+Value server_timeout (\d+)
+
+Start
+  ^\s*MAB\s+Request\s+Fmt\s+Attr1\s+Groupsize\s*\.+\s*${groupsize}$$
+  ^\s*MAB\s+Request\s+Fmt\s+Attr1\s+Separator\s*\.+\s*${separator}$$
+  ^\s*MAB\s+Request\s+Fmt\s+Attr1\s+Case\s*\.+\s*${case}$$
+  ^.*------- -> header
+  ^\s*Interface\s*\.+\s*${interface}\s*$$
+  ^\s*Admin\s+mode\s*\.+\s*${admin_mode}\s*$$
+  ^\s*mab_auth_type\s*\.+\s*${auth_type}\s*$$
+  ^\s*Server\s+Timeout\(secs\)\s*\.+\s*${server_timeout}\s*$$ -> Record
+  ^\s*Interface\s*\.+\s*${interface}\s*$$ -> Start
+
+header
+  ^\s*${interface}\s+${admin_mode}\s+${auth_type} -> Record
+
+EOF

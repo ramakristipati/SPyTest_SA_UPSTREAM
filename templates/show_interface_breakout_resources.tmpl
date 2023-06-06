@@ -1,0 +1,38 @@
+##########################################################
+#On Td3 the output is
+#show interface breakout resources
+#Current ports in the system: 41
+##########################################################
+#On all other platforms:
+#show interface breakout resources
+#Maximum ports supported in the system: 144
+#Current ports in the system: 72
+#--------------------------------------------------
+#Pipeline Ports Max-Ports Front-panel-ports
+#--------------------------------------------------
+#1        19    32        1/1, 1/2, 1/3, 1/4, 1/5, 1/6, 1/7, 1/8, 1/33, 1/34, 1/35, 1/36, 1/37, 1/38, 1/39, 1/40
+#2        19    32        1/9, 1/10, 1/11, 1/12, 1/21, 1/22, 1/23, 1/24, 1/41, 1/42, 1/43, 1/44, 1/53, 1/54, 1/55, 1/56
+#3        17    32        1/13, 1/14, 1/15, 1/16, 1/17, 1/18, 1/19, 1/45, 1/46, 1/46, 1/47, 1/48, 1/49, 1/50, 1/51, 1/52
+#4        19    32        1/25, 1/26, 1/27, 1/28, 1/29, 1/30, 1/31, 1/32, 1/57, 1/58, 1/59, 1/60, 1/61, 1/62, 1/63, 1/64
+##########################################################
+Value Filldown system_maxport (\d+)
+Value Filldown system_currentport (\d+)
+Value Filldown pline (\d+)
+Value Filldown pline_port (\d+)
+Value Filldown pline_maxport (\d+)
+Value List ftpanel_port (\S+,(\s\S+)*)
+
+Start
+  ^\s*Current ports in the system\: ${system_currentport} -> Record
+  ^\s*Maximum ports supported in the system\: ${system_maxport}\s*$$ -> FLEX
+
+FLEX
+  ^\s*Maximum ports supported in the system\: ${system_maxport}\s*$$
+  ^\s*Current ports in the system\: ${system_currentport}\s*$$
+  ^\s*Pipeline\s*Ports\s*Max-Ports\s*Front-panel-ports\s*$$
+  ^\s*${pline}\s+${pline_port}\s+${pline_maxport}\s+${ftpanel_port}\s*$$ -> Record
+  ^$$
+
+EOF
+
+

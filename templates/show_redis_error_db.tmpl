@@ -1,0 +1,14 @@
+Value nhg (\d+)
+Value genid (\d+)
+Value opcode (\S+te|\S+ve)
+Value rc (\S+_\S+_\S+|\S+_\S+_\S+_\S+)
+
+Start
+  ^\s*1\)\s+"nexthop_group"\s*$$
+  ^\s*2\)\s+"${nhg}"\s*$$
+  ^\s*3\)\s+"genid"\s*$$
+  ^\s*4\)\s+"${genid}"\s*$$
+  ^\s*5\)\s+"rc"\s*$$
+  ^\s*6\)\s+"${rc}"\s*$$
+  ^\s*7\)\s+"operation"\s*$$
+  ^\s*8\)\s+"${opcode}"\s*$$ -> Record

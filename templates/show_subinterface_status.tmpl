@@ -1,0 +1,29 @@
+#########################################################
+# admin@sonic:~$ show subinterfaces status
+#  Sub port interface    Speed    MTU    Vlan    Admin                  Type
+#--------------------  -------  -----  ------  -------  --------------------
+#         Ethernet1.1      25G   9100      10       up  802.1q-encapsulation
+#         Ethernet1.2      25G   9100      20     down  802.1q-encapsulation
+#         Ethernet1.3      25G   9100       3       up  802.1q-encapsulation
+#         Ethernet1.4      25G   9100      40       up  802.1q-encapsulation
+#         Ethernet1.5      25G   9100       5       up  802.1q-encapsulation
+#         Ethernet1.6      25G   5006       6       up  802.1q-encapsulation
+#         Ethernet1.7      25G   5007       7       up  802.1q-encapsulation
+#         Ethernet1.8      25G   5008       8       up  802.1q-encapsulation
+#         Ethernet1.9      25G   9100     900       up  802.1q-encapsulation
+#        Ethernet1.11      25G   9100      11     down  802.1q-encapsulation
+#        Ethernet1.12      25G   9100      12       up  802.1q-encapsulation
+#       Ethernet45.10      25G   9100      10       up  802.1q-encapsulation
+#    PortChannel10.10      50G   9100      10       up  802.1q-encapsulation
+#########################################################
+Value Interface (\S+)
+Value Speed (\S+)
+Value MTU (\d+)
+Value Vlan (\d+)
+Value Admin (\w+)
+Value Type (\S+)
+
+Start
+  ^\s*${Interface}\s+${Speed}\s+${MTU}\s+${Vlan}\s+${Admin}\s+${Type}\s*$$ -> Record
+  ^\s*${Interface}\s+${MTU}\s+${Vlan}\s+${Admin}\s+${Type}\s*$$ -> Record
+  ^\s*${Interface}\s+${Vlan}\s+${Admin}\s+${Type}\s*$$ -> Record

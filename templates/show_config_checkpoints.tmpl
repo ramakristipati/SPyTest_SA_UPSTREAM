@@ -1,0 +1,9 @@
+Value ID (\S+)
+Value Timestamp (\S+\s*\S+)
+Value Label (\S+)
+
+
+Start
+  ^\s*ID\s*Timestamp\s*Label\s*$$
+  ^(-+\s*)*$$
+  ^\s*${ID}\s*${Timestamp}\s*${Label}\s*$$ -> Record

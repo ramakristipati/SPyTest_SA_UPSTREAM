@@ -1,0 +1,31 @@
+Value Vendor_Name (.*)
+Value Product_Name (\S+)
+Value Platform_Name (\S+)
+Value Serial_Number (\S+)
+Value Service_Tag (\S+)
+Value Software (\S+)
+Value Version (\S+)
+Value License_Status (.*)
+Value License_Type (\S+)
+Value License_Start_Date (\S+)
+Value License_Duration (.*)
+Value License_Location (\S+)
+
+	
+Start
+  ^\s*System\sInformation\s*$$
+  ^\s*-*\s*$$
+  ^\s*Vendor\sName\s*:\s+${Vendor_Name}\s*$$
+  ^\s*Product\sName\s*:\s+${Product_Name}\s*$$
+  ^Platform\sName\s*:\s+${Platform_Name}\s*$$
+  ^\s*Serial\sNumber\s*:\s+${Serial_Number}\s*$$
+  ^\s*Service\sTag\s*:\s+${Service_Tag}\s*$$
+  ^\s*License\sInformation\s*$$
+  ^\s*(\-)+\s*$$
+  ^\s*Software\s*:\s+${Software}\s*$$
+  ^\s*Version\s*:\s+${Version}\s*$$
+  ^\s*License\sStatus\s*:\s+${License_Status}\s*$$
+  ^\s*License\sType\s*:\s+${License_Type}\s*$$
+  ^\s*License\sStart Date\s*:\s+${License_Start_Date}\s*$$
+  ^\s*License\sDuration\s*:\s+${License_Duration}\s*$$
+  ^\s*License\sLocation\s*:\s+${License_Location}\s*$$ -> Record

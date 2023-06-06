@@ -1,0 +1,20 @@
+Value IFACE (\S+)
+Value Media_type (\S+)
+Value Media_name (\S+)
+Value Max_Power_media (\S+)
+Value Max_Power_name (\S+)
+Value Vendor_Name (\S+\s*\S+)
+Value Serial_number (\S+)
+Value Part_number (\S+)
+Value QSP_Adapter (\S+)
+Value Qualified (\S+)
+Value status (\S+)
+
+Start
+  ^\s*Interface
+  ^\s*${IFACE}\s+(${Media_type}\s+${Media_name})\s+${Max_Power_media}\s*\|\s*${Max_Power_name}\s+${Vendor_Name}\s+${Serial_number}\s+${Part_number}\s+${QSP_Adapter}\s+${Qualified}\s+${status}\S*$$ -> Record
+  ^\s*${IFACE}\s+(${Media_type})\s+${Max_Power_media}\s*|\s*${Max_Power_name}\s+${Vendor_Name}\s+${Serial_number}\s+${Part_number}\s+${QSP_Adapter}\s+${Qualified}\s+${status}\S*$$ -> Record
+  ^\s*${IFACE}\s+(${Media_type}\s+${Media_name})\s+${Vendor_Name}\s+${Part_number}\s+${Serial_number}\s+${Qualified}\S*$$ -> Record
+
+
+EOF

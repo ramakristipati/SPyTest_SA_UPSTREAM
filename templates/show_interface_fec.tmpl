@@ -1,0 +1,13 @@
+Value port (E\S+)
+Value type (\S+\s*\S+)
+Value oper (none|fc|rs)
+Value admin (auto|none|fc|rs)
+Value state (\S+)
+
+Start
+  ^\s*${port}\s+${type}\s+${oper}\s+${admin}\s+${state}\s*$$ -> Record
+  ^\s*${port}\s+${oper}\s+${admin}\s+${state}\s*$$ -> Record
+  ^\s*${port}\s+${type}\s+${oper}\s+${state}\s*$$ -> Record
+  ^\s*${port}\s+${oper}\s+${state}\s*$$ -> Record
+
+EOF

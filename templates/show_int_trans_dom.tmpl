@@ -1,0 +1,111 @@
+Value port ([\w.\/]+)
+Value rx1_power (\S+)
+Value rx2_power (\S+)
+Value rx3_power (\S+)
+Value rx4_power (\S+)
+Value rx5_power (\S+)
+Value rx6_power (\S+)
+Value rx7_power (\S+)
+Value rx8_power (\S+)
+Value temperature (\S+)
+Value tx1_bias (\S+)
+Value tx2_bias (\S+)
+Value tx3_bias (\S+)
+Value tx4_bias (\S+)
+Value tx5_bias (\S+)
+Value tx6_bias (\S+)
+Value tx7_bias (\S+)
+Value tx8_bias (\S+)
+Value tx1_power (\S+)
+Value tx2_power (\S+)
+Value tx3_power (\S+)
+Value tx4_power (\S+)
+Value tx5_power (\S+)
+Value tx6_power (\S+)
+Value tx7_power (\S+)
+Value tx8_power (\S+)
+Value type (\S+)
+Value vendor (\S+|[\S\s\S]+)
+Value vendor_part (\S+)
+Value voltage (\S+)
+Value al_rx_power_hi (\S+)
+Value al_rx_power_lo (\S+)
+Value al_temp_hi (\S+)
+Value al_temp_lo (\S+)
+Value al_tx_power_hi (\S+)
+Value al_tx_power_lo (\S+)
+Value al_tx_bais_hi (\S+)
+Value al_tx_bais_lo (\S+)
+Value al_volt_hi (\S+)
+Value al_volt_lo (\S+)
+Value warn_rx_power_hi (\S+)
+Value warn_rx_power_lo (\S+)
+Value warn_temp_hi (\S+)
+Value warn_temp_lo (\S+)
+Value warn_tx_bias_hi (\S+)
+Value warn_tx_bias_lo (\S+)
+Value warn_tx_power_hi (\S+)
+Value warn_tx_power_lo (\S+)
+Value warn_volt_hi (\S+)
+Value warn_volt_lo (\S+)
+Value presence (None detected)
+Value cable_support (DOM is not supported|DOM Threshold is not supported)
+
+
+Start
+  ^\s*${port}\s*$$
+  ^\s*Identifier:\s+${type}\s*$$
+  ^\s*Vendor Name:\s+${vendor}\s*$$
+  ^\s*Vendor Part:\s+${vendor_part}\s*$$
+  ^\s*ChannelMonitorValues:\s*$$
+  ^\s*Rx1Power:\s+${rx1_power}\s*dBm\s*$$
+  ^\s*Rx2Power:\s+${rx2_power}\s*dBm\s*$$
+  ^\s*Rx3Power:\s+${rx3_power}\s*dBm\s*$$
+  ^\s*Rx4Power:\s+${rx4_power}\s*dBm\s*$$
+  ^\s*Rx5Power:\s+${rx5_power}\s*dBm\s*$$
+  ^\s*Rx6Power:\s+${rx6_power}\s*dBm\s*$$
+  ^\s*Rx7Power:\s+${rx7_power}\s*dBm\s*$$
+  ^\s*Rx8Power:\s+${rx8_power}\s*dBm\s*$$
+  ^\s*Tx1Bias:\s+${tx1_bias}\s*mA\s*$$
+  ^\s*Tx2Bias:\s+${tx2_bias}\s*mA\s*$$
+  ^\s*Tx3Bias:\s+${tx3_bias}\s*mA\s*$$
+  ^\s*Tx4Bias:\s+${tx4_bias}\s*mA\s*$$
+  ^\s*Tx5Bias:\s+${tx1_bias}\s*mA\s*$$
+  ^\s*Tx6Bias:\s+${tx2_bias}\s*mA\s*$$
+  ^\s*Tx7Bias:\s+${tx3_bias}\s*mA\s*$$
+  ^\s*Tx8Bias:\s+${tx4_bias}\s*mA\s*$$
+  ^\s*Tx1Power:\s+${tx1_power}\s*dBm\s*$$
+  ^\s*Tx2Power:\s+${tx2_power}\s*dBm\s*$$
+  ^\s*Tx3Power:\s+${tx3_power}\s*dBm\s*$$
+  ^\s*Tx4Power:\s+${tx4_power}\s*dBm\s*$$
+  ^\s*Tx5Power:\s+${tx5_power}\s*dBm\s*$$
+  ^\s*Tx6Power:\s+${tx6_power}\s*dBm\s*$$
+  ^\s*Tx7Power:\s+${tx7_power}\s*dBm\s*$$
+  ^\s*Tx8Power:\s+${tx8_power}\s*dBm\s*$$
+  ^\s*ChannelThresholdValues:\s*dBm\s*$$
+  ^\s*RxPowerHighAlarm  :\s+${al_rx_power_hi}\s*dBm\s*$$
+  ^\s*RxPowerHighWarning:\s+${warn_rx_power_hi}\s*dBm\s*$$
+  ^\s*RxPowerLowAlarm   :\s+${al_rx_power_lo}\s*dBm\s*$$
+  ^\s*RxPowerLowWarning :\s+${warn_rx_power_lo}\s*dBm\s*$$
+  ^\s*TxBiasHighAlarm   :\s+${al_tx_bais_hi}\s*mA\s*$$
+  ^\s*TxBiasHighWarning :\s+${warn_tx_bias_hi}\s*mA\s*$$
+  ^\s*TxBiasLowAlarm    :\s+${al_tx_bais_lo}\s*mA\s*$$
+  ^\s*TxBiasLowWarning  :\s+${warn_tx_bias_lo}\s*mA\s*$$
+  ^\s*TxPowerHighAlarm  :\s+${al_tx_power_hi}\s*dBm\s*$$
+  ^\s*TxPowerHighWarning:\s+${warn_tx_power_hi}\s*dBm\s*$$
+  ^\s*TxPowerLowAlarm   :\s+${al_tx_power_lo}\s*dBm\s*$$
+  ^\s*TxPowerLowWarning :\s+${warn_tx_power_lo}\s*dBm\s*$$
+  ^\s*ModuleMonitorValues:\s*$$
+  ^\s*Temperature:\s+${temperature}\s*C\s*$$
+  ^\s*Vcc:\s+${voltage}\s*Volts\s*$$
+  ^\s*ModuleThresholdValues:\s*$$
+  ^\s*TempHighAlarm  :\s+${al_temp_hi}\s*C\s*$$
+  ^\s*TempHighWarning:\s+${warn_temp_hi}\s*C\s*$$
+  ^\s*TempLowAlarm   :\s+${al_temp_lo}\s*C\s*$$
+  ^\s*TempLowWarning :\s+${warn_temp_lo}\s*C\s*$$
+  ^\s*VccHighAlarm   :\s+${al_volt_hi}\s*Volts\s*$$
+  ^\s*VccHighWarning :\s+${warn_volt_hi}\s*Volts\s*$$
+  ^\s*VccLowAlarm    :\s+${al_volt_lo}\s*Volts\s*$$
+  ^\s*VccLowWarning  :\s+${warn_volt_lo}\s*Volts\s*$$ -> Record
+  ^\s*${presence}\s*$$ -> Record
+  ^\s*${cable_support}\s*$$ -> Record
